@@ -1,4 +1,3 @@
-import React from "react";
 import type { User } from "../interfaces";
 
 interface Props {
@@ -6,7 +5,7 @@ interface Props {
 }
 
 export const UserRow = ({ user }: Props) => {
-  const { id, avatar, first_name, last_name, email } = user;
+  const { avatar, first_name, last_name, email } = user;
 
   return (
     <tr>
