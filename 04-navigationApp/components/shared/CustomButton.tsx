@@ -25,7 +25,7 @@ const CustomButton = ({
       <Pressable
         onPress={onPress}
         onLongPress={onLongPress}
-        className={`p-3 rounded-md ${btnColor} mb-10`}
+        className={`p-3 rounded-md ${btnColor} mb-2`}
       >
         <Text className="text-white text-center ">{children}</Text>
       </Pressable>
