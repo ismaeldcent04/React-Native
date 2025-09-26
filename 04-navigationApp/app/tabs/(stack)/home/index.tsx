@@ -11,7 +11,7 @@ const HomeScreen = () => {
         <CustomButton
           variant="text-only"
           color="primary"
-          onPress={() => router.push("/products")}
+          onPress={() => router.push("./products")}
         >
           Productos
         </CustomButton>
@@ -19,7 +19,7 @@ const HomeScreen = () => {
         <CustomButton
           variant="text-only"
           color="secondary"
-          onPress={() => router.push("/profile")}
+          onPress={() => router.push("./profile")}
         >
           Perfil
         </CustomButton>
@@ -27,7 +27,7 @@ const HomeScreen = () => {
         <CustomButton
           variant="text-only"
           color="tertiary"
-          onPress={() => router.push("/settings")}
+          onPress={() => router.push("./settings")}
         >
           Ajustes
         </CustomButton>

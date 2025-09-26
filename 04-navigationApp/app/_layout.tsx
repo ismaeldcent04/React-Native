@@ -1,5 +1,6 @@
 import "../global.css";
 import React, { useEffect } from "react";
+import { Drawer } from "expo-router/drawer";
 import { Slot, SplashScreen, Stack } from "expo-router";
 import { useFonts } from "expo-font";
 
