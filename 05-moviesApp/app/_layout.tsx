@@ -6,18 +6,21 @@ import "../global.css";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { nowPlayingAction } from "@/core/actions/movies/now-playing.actions";
 import { Stack } from "expo-router";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const RootLayout = () => {
   const client = new QueryClient();
 
   return (
-    <QueryClientProvider client={client}>
-      <Stack
-        screenOptions={{
-          headerShown: false,
-        }}
-      />
-    </QueryClientProvider>
+    <GestureHandlerRootView>
+      <QueryClientProvider client={client}>
+        <Stack
+          screenOptions={{
+            headerShown: false,
+          }}
+        />
+      </QueryClientProvider>
+    </GestureHandlerRootView>
   );
 };
 
