@@ -4,7 +4,6 @@
     "slug": "06-componentsApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
     "scheme": "06componentsapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,

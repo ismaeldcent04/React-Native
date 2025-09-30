@@ -14,6 +14,8 @@ import { useThemeColor } from "@/hooks/use-theme-color";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { allRoutes } from "@/constants/Routes";
 
+import "../global.css";
+
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 

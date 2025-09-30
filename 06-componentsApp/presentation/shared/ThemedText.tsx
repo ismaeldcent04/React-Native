@@ -6,10 +6,9 @@ interface Props extends TextProps {
   type?: "normal" | "h1" | "h2" | "semi-bold" | "link";
 }
 
-const ThemedText = ({ className, children, type, ...rest }: Props) => {
+const ThemedText = ({ className, type, ...rest }: Props) => {
   return (
     <Text
-      {...rest}
       className={[
         "text-light-text dark:text-dark-text",
         type === "normal" ? "font-normal" : undefined,
@@ -19,9 +18,8 @@ const ThemedText = ({ className, children, type, ...rest }: Props) => {
         type === "link" ? "font-normal underline" : undefined,
         className,
       ].join(" ")}
-    >
-      {children}
-    </Text>
+      {...rest}
+    />
   );
 };
 
