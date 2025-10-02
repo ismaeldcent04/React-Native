@@ -4,16 +4,19 @@ import ThemedView from "@/presentation/shared/ThemedView";
 import { useState } from "react";
 
 import { useColorScheme } from "nativewind";
+import { useThemeChangerContext } from "@/presentation/context/ThemeChangerContext";
 
 const ThemesScreen = () => {
-  const { colorScheme, setColorScheme } = useColorScheme();
+  const { toogleTheme, currentTheme, setSystemTheme } =
+    useThemeChangerContext();
   const [darkModeSettings, setDarkModeSettings] = useState({
-    darkMode: colorScheme === "dark",
+    darkMode: currentTheme === "dark",
     systemMode: false,
   });
 
   const setDarkMode = (value: boolean) => {
-    setColorScheme(value ? "dark" : "light");
+    //setColorScheme(value ? "dark" : "light");
+    toogleTheme();
     setDarkModeSettings({
       darkMode: value,
       systemMode: false,
@@ -21,10 +24,13 @@ const ThemesScreen = () => {
   };
 
   const setSystemMode = (value: boolean) => {
-    setDarkModeSettings({
-      darkMode: darkModeSettings.darkMode,
-      systemMode: value,
-    });
+    if (value) {
+      setDarkModeSettings({
+        darkMode: darkModeSettings.darkMode,
+        systemMode: value,
+      });
+      setSystemTheme();
+    }
   };
   return (
     <ThemedView margin>
