@@ -18,7 +18,8 @@ const ThemedView = ({
   bgColor,
   children,
 }: Props) => {
-  const backgroundColor = bgColor ?? useThemeColor({}, "background");
+  const themeColor = useThemeColor({}, "background");
+  const backgroundColor = bgColor ?? themeColor;
   const safeArea = useSafeAreaInsets();
 
   return (
@@ -30,6 +31,7 @@ const ThemedView = ({
           paddingTop: safe ? safeArea.top : 0,
           marginHorizontal: margin ? 10 : 0,
         },
+        style,
       ]}
       className={className}
     >
