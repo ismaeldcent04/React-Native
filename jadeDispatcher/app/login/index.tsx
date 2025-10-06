@@ -2,6 +2,7 @@ import { View, Text, Image, TextInput, Button, Pressable } from "react-native";
 import React from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import CustomInput from "@/components/login/CustomInput";
+import { router } from "expo-router";
 
 const LoginScreen = () => {
   const safeArea = useSafeAreaInsets();
@@ -27,7 +28,10 @@ const LoginScreen = () => {
             icon="eye-outline"
             textContentType="password"
           />
-          <Pressable className="bg-[#D52041] w-[70%] h-16 rounded-xl items-center justify-center mt-8">
+          <Pressable
+            onPress={() => router.push("/(tabs)/pending")}
+            className="bg-[#D52041] w-[70%] h-16 rounded-xl items-center justify-center mt-8"
+          >
             <Text className="text-white font-martel-extraBold font-bold">
               Iniciar Sesion
             </Text>

@@ -8,34 +8,34 @@ export const unstable_settings = {
 
 export default function RootLayout() {
   return (
-    <Tabs>
+    <Tabs screenOptions={{ tabBarActiveTintColor: "#D52041" }}>
       <Tabs.Screen
-        name="all"
+        name="all/index"
         options={{
           headerShown: false,
           title: "All",
           tabBarIcon: ({ color }) => (
-            <Ionicons size={28} name="person-add-outline" color={color} />
+            <Ionicons size={28} name="infinite-outline" color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="pending"
+        name="pending/index"
         options={{
           headerShown: false,
           title: "Pending",
           tabBarIcon: ({ color }) => (
-            <Ionicons size={28} name="person-add-outline" color={color} />
+            <Ionicons size={28} name="alarm-outline" color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="dispatched"
+        name="dispatched/index"
         options={{
           headerShown: false,
           title: "Dispatched",
           tabBarIcon: ({ color }) => (
-            <Ionicons size={28} name="person-add-outline" color={color} />
+            <Ionicons size={28} name="checkmark-circle-outline" color={color} />
           ),
         }}
       />
