@@ -16,7 +16,7 @@ const OrderCard = () => {
       ]
     );
   return (
-    <View className="h-48 bg-white  my-4 rounded-xl shadow p-4 gap-4 ">
+    <View className="h-48  bg-white  my-4 rounded-xl shadow p-4 gap-4 sm:w-[650px] ">
       <View className="flex-row gap-4 my-2 items-center">
         <Image
           className="h-14 w-14 shadow rounded-lg "
