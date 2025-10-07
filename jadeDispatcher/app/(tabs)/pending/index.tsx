@@ -3,8 +3,13 @@ import React from "react";
 
 import PageHeader from "@/components/shared/PageHeader";
 import OrderCard from "@/components/UI/OrderCard";
+import { ordersPendingAction } from "@/core/actions/orders/order-pending.actions";
+import axios from "axios";
 
 const PendingScreen = () => {
+  console.log("antes");
+  ordersPendingAction();
+  console.log("despues");
   return (
     <View className="w-full">
       <PageHeader />
