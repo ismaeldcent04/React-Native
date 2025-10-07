@@ -1,4 +1,4 @@
-import { View, Text, Image, FlatList, ActivityIndicator } from "react-native";
+import { View, FlatList, ActivityIndicator } from "react-native";
 import React from "react";
 
 import PageHeader from "@/components/shared/PageHeader";
