@@ -1,7 +1,15 @@
 import { View, Text, Image, Pressable, Alert } from "react-native";
 import React from "react";
+import { Order } from "@/infraestructure/interfaces/Order";
+import { Formatter } from "@/helpers/formatter";
 
-const OrderCard = () => {
+interface Props {
+  order: Order;
+}
+
+const OrderCard = ({ order }: Props) => {
+  const [_, franchise, orderNo] = order.orderInfo.split("-");
+  const color = order.orderStatus === 1 ? "#EEA736" : "#1A7815";
   const createTwoButtonAlert = () =>
     Alert.alert(
       "Despachar Pedido",
@@ -16,8 +24,8 @@ const OrderCard = () => {
       ]
     );
   return (
-    <View className="h-48  bg-white  my-4 rounded-xl shadow p-4 gap-4 sm:w-[650px] ">
-      <View className="flex-row gap-4 my-2 items-center">
+    <View className="h-48 w-[350px] bg-white  my-4 rounded-xl shadow p-4 gap-4 sm:w-[650px] ">
+      <View className="flex-row  my-2 items-center justify-between">
         <Image
           className="h-14 w-14 shadow rounded-lg "
           source={{
@@ -27,20 +35,25 @@ const OrderCard = () => {
 
         <View className="flex gap-1">
           <View className="flex-row items-center gap-2">
-            <Text className="text-[#EEA736] text-[10px] ">Pedido</Text>
-            <Text className="text-[#838383] text-[10px]">Hoy - 01:24 pm</Text>
+            <Text className=" text-[10px] " style={{ color: color }}>
+              {order.orderStatus === 1 ? "Pedido" : "Despachado"}
+            </Text>
+            <Text className="text-[#838383] text-[10px]">
+              {`${Formatter.getRelativeDayLabel(order.date.toString())} - ${Formatter.date(order.date)}`}
+            </Text>
           </View>
 
-          <Text className="font-bold">Ismael David Dicent Lahoz</Text>
+          <Text className="font-bold">{order.name}</Text>
           <Text className="text-[#5B5B5B] text-sm font-light">
-            (809)-875-4411
+            {order.contact}
           </Text>
         </View>
-        <Text className="font-bold">#13490</Text>
+        <Text className="font-bold">#{orderNo}</Text>
       </View>
       <Pressable
         onPress={createTwoButtonAlert}
-        className="h-12 items-center justify-center bg-[#D52041] rounded-xl "
+        className={`h-12 items-center justify-center ${order.orderStatus === 0 || order.orderStatus === 2 ? "bg-gray-400" : "bg-[#D52041]"} bg-[#D52041] rounded-xl`}
+        disabled={order.orderStatus === 0 || order.orderStatus === 2}
       >
         <Text className="text-white">Despachar</Text>
       </Pressable>

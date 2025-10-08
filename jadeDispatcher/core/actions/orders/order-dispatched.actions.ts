@@ -2,14 +2,14 @@ import { orderApi } from "@/core/api/order-api";
 import { OrderResponse } from "@/infraestructure/interfaces/orders-response";
 import { OrderMapper } from "@/infraestructure/mappers/order.mapper";
 
-export const ordersPendingAction = async () => {
+export const ordersDispatchedAction = async () => {
   try {
     const { data } = await orderApi.get<OrderResponse[]>(
-      "/Notificacion?filterOn=EstadoOrden&filterQuery=1&isAscending=false&pageNumber=1&pageSize=10"
+      "/Notificacion?filterOn=EstadoOrden&filterQuery=0&isAscending=false&pageNumber=1&pageSize=10"
     );
 
     const orders = data.map((o) => OrderMapper.fromOrderResponseToEntity(o));
-    console.log(orders);
+
     return orders;
   } catch (error) {
     console.log(error);

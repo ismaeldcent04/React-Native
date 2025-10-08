@@ -1,11 +1,24 @@
-import { View, Text } from "react-native";
+import { View, FlatList, ActivityIndicator } from "react-native";
 import React from "react";
-import { ordersPendingAction } from "@/core/actions/orders/order-pending.actions";
+
+import PageHeader from "@/components/shared/PageHeader";
+import { useOrders } from "@/hooks/useOrders";
+import OrderCard from "@/components/UI/OrderCard";
 
 const DispatchedScreen = () => {
+  const { dispatchedOrdersQuery } = useOrders();
   return (
-    <View>
-      <Text>DispatchedScreen</Text>
+    <View className="w-full">
+      <PageHeader />
+      <View className="w-full ">
+        <FlatList
+          contentContainerStyle={{ alignItems: "center", width: "100%" }}
+          data={dispatchedOrdersQuery.data ?? []}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => <OrderCard order={item} />}
+          scrollEnabled
+        />
+      </View>
     </View>
   );
 };

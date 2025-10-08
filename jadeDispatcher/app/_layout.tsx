@@ -1,5 +1,11 @@
 import { Slot } from "expo-router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "../global.css";
 export default function RootLayout() {
-  return <Slot />;
+  const client = new QueryClient();
+  return (
+    <QueryClientProvider client={client}>
+      <Slot />
+    </QueryClientProvider>
+  );
 }
