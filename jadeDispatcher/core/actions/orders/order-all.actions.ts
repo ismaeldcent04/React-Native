@@ -6,7 +6,6 @@ import { OrderMapper } from "@/infraestructure/mappers/order.mapper";
 export const ordersAllAction = async () => {
   try {
     const sucursal = await SecureStorageAdapter.getItem("username");
-    console.log(sucursal);
     const { data } = await orderApi.get<OrderResponse[]>(
       `/Notificacion?filterOn=TipoNotificacion&filterQuery=${sucursal}&isAscending=false&pageNumber=1&pageSize=10`
     );

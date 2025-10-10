@@ -5,4 +5,9 @@ export interface Order {
   orderStatus: number | null;
   orderInfo: string;
   contact: string;
+  sucursal: string;
+  rnc: string;
+  companyCode: number;
+  companyName: string;
+  body: string;
 }

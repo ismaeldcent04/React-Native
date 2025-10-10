@@ -2,12 +2,14 @@ import { View, Text, Image, Pressable, Alert } from "react-native";
 import React from "react";
 import { Order } from "@/infraestructure/interfaces/Order";
 import { Formatter } from "@/helpers/formatter";
+import { useOrders } from "@/hooks/useOrders";
 
 interface Props {
   order: Order;
 }
 
 const OrderCard = ({ order }: Props) => {
+  const { orderMutation } = useOrders();
   const orderNo =
     order.orderInfo !== null ? order.orderInfo.split("-")[2] : order.id;
 
@@ -22,7 +24,28 @@ const OrderCard = ({ order }: Props) => {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel",
         },
-        { text: "OK", onPress: () => console.log("OK Pressed") },
+        {
+          text: "OK",
+          onPress: () =>
+            orderMutation.mutate({
+              oid: order.id,
+              clienternc: order.rnc,
+              clienteCodigo: order.companyCode,
+              clienteNombre: order.companyName,
+              tipoNotificacion: order.orderInfo,
+              estadoOrden: order.orderStatus,
+              cuerpo: `Hola ${order.name} 👋🏼, tu pedido en Jade Teriyaki ya está *LISTO* para retirar. ¡Te esperamos!`,
+              titulo: "Notificacion de estado de orden (Jade Teriyaki)",
+              firma: order.name,
+              puesto: "",
+              fecha: new Date(),
+              fechaRecibido: order.date,
+              enviado: false,
+              envioInmediato: true,
+              sucursal: order.sucursal,
+              contacto: order.contact,
+            }),
+        },
       ]
     );
   return (

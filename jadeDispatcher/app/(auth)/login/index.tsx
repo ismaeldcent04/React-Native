@@ -36,7 +36,7 @@ const LoginScreen = () => {
     setIsPosting(false);
 
     if (wasSuccessful) {
-      router.replace("/(tabs)/pending");
+      router.replace("/(orders-app)/(tabs)/pending");
     } else {
       Alert.alert("Error", "Usuario o password no son correctos");
     }
@@ -47,7 +47,7 @@ const LoginScreen = () => {
         <View className="bg-[#d52041] flex flex-1">
           <View className="w-full h-[45%] items-center justify-center">
             <Image
-              source={require("../../assets/images/teriyaki.png")}
+              source={require("../../../assets/images/teriyaki.png")}
               className=""
               resizeMode="cover"
             />

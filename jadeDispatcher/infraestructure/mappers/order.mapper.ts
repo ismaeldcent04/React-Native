@@ -10,7 +10,12 @@ export class OrderMapper {
       date: order.fecha,
       orderStatus: order.estadoOrden,
       orderInfo: order.tipoNotificacion,
-      contact: order.notificacionContactos[0].contacto,
+      sucursal: order.sucursal,
+      contact: order.notificacionContactos[0]?.contacto,
+      rnc: order.rnc,
+      companyCode: order.clienteCodigo,
+      companyName: order.clienteNombre,
+      body: order.cuerpo,
     };
   }
 }

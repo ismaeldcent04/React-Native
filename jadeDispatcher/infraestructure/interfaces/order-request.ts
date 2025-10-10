@@ -1,6 +1,6 @@
-export interface OrderResponse {
+export interface OrderRequest {
   oid: number;
-  rnc: string;
+  clienternc: string;
   clienteCodigo: number;
   clienteNombre: string;
   tipoNotificacion: string;
@@ -13,18 +13,6 @@ export interface OrderResponse {
   estadoOrden: number | null;
   enviado: boolean;
   envioInmediato: boolean;
-  notificacionContactos: NotificacionContacto[];
   sucursal: string;
-}
-
-export interface NotificacionContacto {
-  oid: number;
-  notificacion: number;
   contacto: string;
-  tipo: string;
-  copia: boolean;
-  enviado: boolean;
-  intento: number;
-  ultimoIntento: Date;
-  fechaEnviado: Date;
 }

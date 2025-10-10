@@ -19,7 +19,7 @@ const PageHeader = () => {
             Sucursal
           </Text>
           <Text className="text-white font-martel-extraBold font-bold">
-            {username?.replace("Pedidos-", "").replace("Pedidos", "")}
+            {username}
           </Text>
         </View>
         <Text className="text-white">Ordénes</Text>

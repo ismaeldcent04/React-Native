@@ -1,8 +1,14 @@
-import { Tabs } from "expo-router";
+import { Redirect, Tabs } from "expo-router";
 
 import { Ionicons } from "@expo/vector-icons";
+import {
+  AuthStatus,
+  useAuthStore,
+} from "@/presentation/auth/store/useAuthStore";
+import { useEffect } from "react";
+import { ActivityIndicatorComponent, View } from "react-native";
 
-export default function RootLayout() {
+export default function OrderAppLayout() {
   return (
     <Tabs screenOptions={{ tabBarActiveTintColor: "#D52041" }}>
       <Tabs.Screen

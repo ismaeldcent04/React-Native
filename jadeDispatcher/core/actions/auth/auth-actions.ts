@@ -1,23 +1,22 @@
 import { orderApi } from "@/core/api/order-api";
 import { AuthResponse } from "@/infraestructure/interfaces/auth-response";
+import { OrderResponse } from "@/infraestructure/interfaces/orders-response";
 
 const returnUserToken = (
-  data: AuthResponse
+  data: OrderResponse
 ): { username: string; token: string } => {
-  const { contactoNombre, oid, nota } = data;
-
-  const [_, token] = nota.split(";");
+  const { sucursal, oid, rnc } = data;
 
   return {
-    username: contactoNombre,
-    token,
+    username: sucursal,
+    token: rnc,
   };
 };
 
 export const authLogin = async (username: string, password: string) => {
   try {
-    const { data } = await orderApi.get<AuthResponse[]>(
-      `/ClienteComunicacion?filterOn=ContactoNombre&filterQuery=${username}&pageNumber=1&pageSize=10`
+    const { data } = await orderApi.get<OrderResponse[]>(
+      `/Notificacion?filterOn=Sucursal&filterQuery=${username}&pageNumber=1&pageSize=10`
     );
     console.log(data);
 
@@ -25,8 +24,8 @@ export const authLogin = async (username: string, password: string) => {
     console.log(resp);
     if (
       resp !== null &&
-      resp.contactoNombre.includes(username) &&
-      resp.contactoNombre.includes(password)
+      resp.sucursal === username &&
+      resp.sucursal === password
     ) {
       return returnUserToken(resp);
     } else {
@@ -38,10 +37,10 @@ export const authLogin = async (username: string, password: string) => {
   }
 };
 
-export const authCheckStatus = async () => {
+export const authCheckStatus = async (username: string) => {
   try {
-    const { data } = await orderApi.get<AuthResponse>(
-      `/ClienteComunicacion?filterOn=ContactoNombre&filterQuery=Pedidos&pageNumber=1&pageSize=10`
+    const { data } = await orderApi.get<OrderResponse>(
+      `/Notificacion?filterOn=Sucursal&filterQuery=${username}&pageNumber=1&pageSize=10`
     );
     if (data !== null) {
       return returnUserToken(data);

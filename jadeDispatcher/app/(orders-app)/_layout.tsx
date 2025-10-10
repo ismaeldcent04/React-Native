@@ -1,12 +1,14 @@
-import { View, Text, ActivityIndicatorComponent } from "react-native";
-import React, { useEffect } from "react";
+import { Redirect, Tabs, Href, Slot, Stack } from "expo-router";
+
+import { Ionicons } from "@expo/vector-icons";
 import {
   AuthStatus,
   useAuthStore,
 } from "@/presentation/auth/store/useAuthStore";
-import { Redirect } from "expo-router";
+import { useEffect } from "react";
+import { ActivityIndicatorComponent, View } from "react-native";
 
-const Index = () => {
+export default function OrderAppLayout() {
   const { status, checkStatus } = useAuthStore();
 
   useEffect(() => {
@@ -25,7 +27,5 @@ const Index = () => {
     return <Redirect href="/(auth)/login" />;
   }
 
-  return <Redirect href="/(orders-app)/(tabs)/pending" />;
-};
-
-export default Index;
+  return <Slot />;
+}
