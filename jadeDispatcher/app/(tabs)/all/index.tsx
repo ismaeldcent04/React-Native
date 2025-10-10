@@ -1,8 +1,8 @@
 import { View, FlatList, ActivityIndicator } from "react-native";
 import React from "react";
-import PageHeader from "@/components/shared/PageHeader";
+import PageHeader from "@/presentation/shared/components/PageHeader";
 import { useOrders } from "@/hooks/useOrders";
-import OrderCard from "@/components/UI/OrderCard";
+import OrderCard from "@/presentation/UI/components/OrderCard";
 
 const AllScreen = () => {
   const { allOrdersQuery } = useOrders();
@@ -11,7 +11,11 @@ const AllScreen = () => {
       <PageHeader />
       <View className="w-full ">
         <FlatList
-          contentContainerStyle={{ alignItems: "center", width: "100%" }}
+          contentContainerStyle={{
+            alignItems: "center",
+            width: "100%",
+            paddingBottom: 60,
+          }}
           data={allOrdersQuery.data ?? []}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => <OrderCard order={item} />}

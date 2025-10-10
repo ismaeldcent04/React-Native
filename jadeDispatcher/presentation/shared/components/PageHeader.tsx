@@ -1,9 +1,12 @@
 import { View, Text, Image } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useAuthStore } from "@/presentation/auth/store/useAuthStore";
 
 const PageHeader = () => {
   const safeArea = useSafeAreaInsets();
+  const { username } = useAuthStore();
+  useEffect(() => {});
   return (
     <View className="bg-[#D52041]">
       <View
@@ -15,7 +18,7 @@ const PageHeader = () => {
             Sucursal
           </Text>
           <Text className="text-white font-martel-extraBold font-bold">
-            JT360
+            {username?.replace("Pedidos-", "").replace("Pedidos", "")}
           </Text>
         </View>
         <Text className="text-white">Ordénes</Text>

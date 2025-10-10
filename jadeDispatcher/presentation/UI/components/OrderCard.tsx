@@ -8,7 +8,9 @@ interface Props {
 }
 
 const OrderCard = ({ order }: Props) => {
-  const [_, franchise, orderNo] = order.orderInfo.split("-");
+  const orderNo =
+    order.orderInfo !== null ? order.orderInfo.split("-")[2] : order.id;
+
   const color = order.orderStatus === 1 ? "#EEA736" : "#1A7815";
   const createTwoButtonAlert = () =>
     Alert.alert(

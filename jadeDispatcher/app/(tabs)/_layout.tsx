@@ -2,10 +2,6 @@ import { Tabs } from "expo-router";
 
 import { Ionicons } from "@expo/vector-icons";
 
-export const unstable_settings = {
-  anchor: "(tabs)",
-};
-
 export default function RootLayout() {
   return (
     <Tabs screenOptions={{ tabBarActiveTintColor: "#D52041" }}>

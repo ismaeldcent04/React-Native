@@ -1,8 +1,8 @@
 import { View, FlatList, ActivityIndicator } from "react-native";
 import React from "react";
 
-import PageHeader from "@/components/shared/PageHeader";
-import OrderCard from "@/components/UI/OrderCard";
+import PageHeader from "@/presentation/shared/components/PageHeader";
+import OrderCard from "@/presentation/UI/components/OrderCard";
 
 import { useOrders } from "@/hooks/useOrders";
 
@@ -13,7 +13,11 @@ const PendingScreen = () => {
       <PageHeader />
       <View className="w-full ">
         <FlatList
-          contentContainerStyle={{ alignItems: "center", width: "100%" }}
+          contentContainerStyle={{
+            alignItems: "center",
+            width: "100%",
+            paddingBottom: 60,
+          }}
           data={pendingOrdersQuery.data?.filter((o) => o.orderStatus === 1)}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => <OrderCard order={item} />}
