@@ -15,7 +15,7 @@ export default function OrderAppLayout() {
         name="pending/index"
         options={{
           headerShown: false,
-          title: "Pending",
+          title: "Pendientes",
           tabBarIcon: ({ color }) => (
             <Ionicons size={28} name="alarm-outline" color={color} />
           ),
@@ -25,7 +25,7 @@ export default function OrderAppLayout() {
         name="dispatched/index"
         options={{
           headerShown: false,
-          title: "Dispatched",
+          title: "Despachadas",
           tabBarIcon: ({ color }) => (
             <Ionicons size={28} name="checkmark-circle-outline" color={color} />
           ),
@@ -35,7 +35,7 @@ export default function OrderAppLayout() {
         name="all/index"
         options={{
           headerShown: false,
-          title: "All",
+          title: "Todas",
           tabBarIcon: ({ color }) => (
             <Ionicons size={28} name="infinite-outline" color={color} />
           ),

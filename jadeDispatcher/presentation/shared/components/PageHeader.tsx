@@ -22,7 +22,7 @@ const PageHeader = () => {
             {username}
           </Text>
         </View>
-        <Text className="text-white">Ordénes</Text>
+        <Text className="text-white">Órdenes</Text>
         {/* <Image
           className="w-10 h-10 rounded-full "
           resizeMode="cover"
