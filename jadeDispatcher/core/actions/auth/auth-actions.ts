@@ -1,6 +1,5 @@
 import { orderApi } from "@/core/api/order-api";
 import { AuthResponse } from "@/infraestructure/interfaces/auth-response";
-import { User } from "@/infraestructure/interfaces/User";
 
 const returnUserToken = (
   data: AuthResponse

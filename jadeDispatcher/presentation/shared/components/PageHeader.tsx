@@ -2,6 +2,7 @@ import { View, Text, Image } from "react-native";
 import React, { useEffect } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAuthStore } from "@/presentation/auth/store/useAuthStore";
+import LogoutIconButton from "@/presentation/auth/components/logout/LogoutIconButton";
 
 const PageHeader = () => {
   const safeArea = useSafeAreaInsets();
@@ -22,11 +23,12 @@ const PageHeader = () => {
           </Text>
         </View>
         <Text className="text-white">Ordénes</Text>
-        <Image
+        {/* <Image
           className="w-10 h-10 rounded-full "
           resizeMode="cover"
           source={{ uri: "https://i.stack.imgur.com/l60Hf.png" }}
-        />
+        /> */}
+        <LogoutIconButton />
       </View>
     </View>
   );

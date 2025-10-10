@@ -2,15 +2,12 @@ import {
   View,
   Text,
   Image,
-  TextInput,
-  Button,
   Pressable,
   KeyboardAvoidingView,
   ScrollView,
   Alert,
 } from "react-native";
 import React, { useState } from "react";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { router } from "expo-router";
 import CustomInput from "@/presentation/auth/components/login/CustomInput";
@@ -18,7 +15,7 @@ import { useAuthStore } from "@/presentation/auth/store/useAuthStore";
 
 const LoginScreen = () => {
   const { login } = useAuthStore();
-  const safeArea = useSafeAreaInsets();
+
   const [isPosting, setIsPosting] = useState(false);
   const [form, setForm] = useState({
     username: "",

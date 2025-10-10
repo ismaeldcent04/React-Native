@@ -1,7 +1,7 @@
-import { View, Text, ActivityIndicator } from "react-native";
+import { View, ActivityIndicator } from "react-native";
 import React, { useEffect } from "react";
 import { Redirect } from "expo-router";
-import { QueryClient } from "@tanstack/react-query";
+
 import {
   AuthStatus,
   useAuthStore,
