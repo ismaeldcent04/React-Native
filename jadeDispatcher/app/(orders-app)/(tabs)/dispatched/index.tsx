@@ -2,31 +2,27 @@ import { View, FlatList, Text } from "react-native";
 import React from "react";
 
 import PageHeader from "@/presentation/shared/components/PageHeader";
-import { useOrders } from "@/hooks/useOrders";
-import OrderCard from "@/presentation/UI/components/OrderCard";
+import { useOrders } from "@/presentation/order/hooks/useOrders";
+import OrderCard from "@/presentation/order/components/OrderCard";
+import OrderList from "@/presentation/order/components/OrderList";
 
 const DispatchedScreen = () => {
   const { dispatchedOrdersQuery } = useOrders();
   return (
-    <View className="w-full">
+    <View className="w-full flex-1">
       <PageHeader />
-      <View className="w-full ">
-        {dispatchedOrdersQuery.data?.length === 0 ? (
-          <Text className="p-4">No hay órdenes despachadas</Text>
-        ) : (
-          <FlatList
-            contentContainerStyle={{
-              alignItems: "center",
-              width: "100%",
-              paddingBottom: 60,
-            }}
-            data={dispatchedOrdersQuery.data}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => <OrderCard order={item} />}
-            scrollEnabled
-          />
-        )}
-      </View>
+
+      {dispatchedOrdersQuery.data?.pages.flatMap((pages) => pages).length ===
+      0 ? (
+        <Text className="p-4">No hay órdenes despachadas</Text>
+      ) : (
+        <OrderList
+          orders={
+            dispatchedOrdersQuery.data?.pages.flatMap((pages) => pages) ?? []
+          }
+          loadNextPage={dispatchedOrdersQuery.fetchNextPage}
+        />
+      )}
     </View>
   );
 };

@@ -1,8 +1,8 @@
 import { View, Text, Image, Pressable, Alert } from "react-native";
 import React from "react";
 import { Order } from "@/infraestructure/interfaces/Order";
-import { Formatter } from "@/helpers/formatter";
-import { useOrders } from "@/hooks/useOrders";
+import { Formatter } from "@/helpers/formatters/formatter";
+import { useOrders } from "@/presentation/order/hooks/useOrders";
 
 interface Props {
   order: Order;

@@ -3,11 +3,11 @@ import { SecureStorageAdapter } from "@/helpers/adapters/secure-storage";
 import { OrderResponse } from "@/infraestructure/interfaces/orders-response";
 import { OrderMapper } from "@/infraestructure/mappers/order.mapper";
 
-export const ordersAllAction = async () => {
+export const ordersAllAction = async (pageSize = 5, pageNumber = 1) => {
   try {
     const sucursal = await SecureStorageAdapter.getItem("username");
     const { data } = await orderApi.get<OrderResponse[]>(
-      `/Notificacion?filterOn=TipoNotificacion&filterQuery=${sucursal}&isAscending=false&pageNumber=1&pageSize=10`
+      `/Notificacion?filterOn=TipoNotificacion&filterQuery=${sucursal}&isAscending=false&pageNumber=${pageNumber}&pageSize=${pageSize}`
     );
 
     const orders = data.map((o) => OrderMapper.fromOrderResponseToEntity(o));

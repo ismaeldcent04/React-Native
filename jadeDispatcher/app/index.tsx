@@ -22,10 +22,10 @@ const Index = () => {
   }
 
   if (status === AuthStatus.unauthenticated) {
-    return <Redirect href="/(auth)/login" />;
+    return <Redirect href="/login" />;
   }
 
-  return <Redirect href="/(orders-app)/(tabs)/pending" />;
+  return <Redirect href="/pending" />;
 };
 
 export default Index;

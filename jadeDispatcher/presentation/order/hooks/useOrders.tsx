@@ -1,35 +1,55 @@
 import { ordersDispatchedAction } from "@/core/actions/orders/order-dispatched.actions";
 import { ordersPendingAction } from "@/core/actions/orders/order-pending.actions";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 
-import { ordersAllAction } from "../core/actions/orders/order-all.actions";
+import { ordersAllAction } from "../../../core/actions/orders/order-all.actions";
 import { Order } from "@/infraestructure/interfaces/Order";
 import { updateOrderAction } from "@/core/actions/order/order-update.actions";
 import { OrderRequest } from "@/infraestructure/interfaces/order-request";
-import { OrderMapper } from "../infraestructure/mappers/order.mapper";
+import { OrderMapper } from "../../../infraestructure/mappers/order.mapper";
 import { createOrderAction } from "@/core/actions/order/create-order-actions";
 
 export const useOrders = () => {
   const queryClient = useQueryClient();
-  const pendingOrdersQuery = useQuery({
+  const pendingOrdersQuery = useInfiniteQuery({
     queryKey: ["orders", "pending"],
-    queryFn: ordersPendingAction,
+    queryFn: ({ pageParam = 1 }) => ordersPendingAction(5, pageParam),
     staleTime: 10000,
     refetchInterval: 5000,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) => {
+      if (!lastPage || lastPage.length < 5) return undefined;
+      return allPages.length + 1;
+    },
   });
 
-  const dispatchedOrdersQuery = useQuery({
+  const dispatchedOrdersQuery = useInfiniteQuery({
     queryKey: ["orders", "dispatched"],
-    queryFn: ordersDispatchedAction,
+    queryFn: ({ pageParam = 1 }) => ordersDispatchedAction(5, pageParam),
     staleTime: 10000,
     refetchInterval: 5000,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) => {
+      if (!lastPage || lastPage.length < 5) return undefined;
+      return allPages.length + 1;
+    },
   });
 
-  const allOrdersQuery = useQuery({
+  const allOrdersQuery = useInfiniteQuery({
     queryKey: ["orders", "all"],
-    queryFn: ordersAllAction,
+    queryFn: ({ pageParam = 1 }) => ordersAllAction(5, pageParam),
     staleTime: 10000,
     refetchInterval: 5000,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) => {
+      if (!lastPage || lastPage.length < 5) return undefined;
+      return allPages.length + 1;
+    },
   });
 
   const orderMutation = useMutation({

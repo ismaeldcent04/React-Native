@@ -36,7 +36,7 @@ const LoginScreen = () => {
     setIsPosting(false);
 
     if (wasSuccessful) {
-      router.replace("/(orders-app)/(tabs)/pending");
+      router.replace("/pending");
     } else {
       Alert.alert("Error", "Usuario o password no son correctos");
     }
@@ -52,11 +52,7 @@ const LoginScreen = () => {
               resizeMode="cover"
             />
           </View>
-          {/* <Image
-        source={require("../../assets/images/teriyaki.png")}
-        className="w-full h-[45%]"
-        resizeMode="cover"
-      /> */}
+
           <View className="">
             <View className="bg-white rounded-2xl h-full flex items-center gap-10 pt-20">
               <CustomInput
