@@ -5,8 +5,9 @@ import {
   Pressable,
   Alert,
   useWindowDimensions,
+  Animated,
 } from "react-native";
-import React from "react";
+import React, { useRef } from "react";
 import { Order } from "@/infraestructure/interfaces/Order";
 import { Formatter } from "@/helpers/formatters/formatter";
 import { useOrders } from "@/presentation/order/hooks/useOrders";
@@ -22,7 +23,25 @@ const OrderCard = ({ order }: Props) => {
     order.orderInfo !== null ? order.orderInfo.split("-")[2] : order.id;
 
   const color = order.orderStatus === 1 ? "#EEA736" : "#1A7815";
-  const createTwoButtonAlert = () =>
+
+  const scaleAnim = useRef(new Animated.Value(1)).current;
+
+  const animatePressIn = () => {
+    Animated.spring(scaleAnim, {
+      toValue: 0.97,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const animatePressOut = () => {
+    Animated.spring(scaleAnim, {
+      toValue: 1,
+      friction: 3,
+      tension: 40,
+      useNativeDriver: true,
+    }).start();
+  };
+  const dispatchOrder = () =>
     Alert.alert(
       "Despachar Pedido",
       "Esta seguro/a de que quiere despachar el pedido?",
@@ -56,47 +75,72 @@ const OrderCard = ({ order }: Props) => {
         },
       ]
     );
-  return (
-    <View
-      className="h-48  bg-white  my-4 rounded-xl shadow p-4 gap-4  "
-      style={{
-        width: width * 0.9,
-        marginHorizontal: "auto",
-      }}
-    >
-      <View className="flex-row  my-2 items-center justify-between">
-        <Image
-          className="h-14 w-14 shadow rounded-lg "
-          source={{
-            uri: "https://pedidosya.dhmedia.io/image/pedidosya/restaurants/logo-jade-teriyaki.png",
-          }}
-        />
 
-        <View className="flex gap-1">
-          <View className="flex-row items-center gap-2">
-            <Text className=" text-[10px] " style={{ color: color }}>
-              {order.orderStatus === 1 ? "Pedido" : "Despachado"}
-            </Text>
-            <Text className="text-[#838383] text-[10px]">
-              {`${Formatter.getRelativeDayLabel(order.date.toString())} - ${Formatter.date(order.date)}`}
+  const deleteOrder = () => {
+    Alert.alert(
+      "Eliminar pedido",
+      "Esta seguro/a de que quiere eliminar el pedido?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        {
+          text: "OK",
+          onPress: () => {},
+        },
+      ]
+    );
+  };
+  return (
+    <Pressable
+      onLongPress={deleteOrder}
+      onPressIn={animatePressIn}
+      onPressOut={animatePressOut}
+    >
+      <Animated.View
+        className="h-48  bg-white  my-4 rounded-xl shadow p-4 gap-4  "
+        style={{
+          width: width * 0.9,
+          marginHorizontal: "auto",
+          transform: [{ scale: scaleAnim }],
+        }}
+      >
+        <View className="flex-row  my-2 items-center justify-between">
+          <Image
+            className="h-14 w-14 shadow rounded-lg "
+            source={{
+              uri: "https://pedidosya.dhmedia.io/image/pedidosya/restaurants/logo-jade-teriyaki.png",
+            }}
+          />
+
+          <View className="flex gap-1">
+            <View className="flex-row items-center gap-2">
+              <Text className=" text-[10px] " style={{ color: color }}>
+                {order.orderStatus === 1 ? "Pedido" : "Despachado"}
+              </Text>
+              <Text className="text-[#838383] text-[10px]">
+                {`${Formatter.getRelativeDayLabel(order.date.toString())} - ${Formatter.date(order.date)}`}
+              </Text>
+            </View>
+
+            <Text className="font-bold">{order.name}</Text>
+            <Text className="text-[#5B5B5B] text-sm font-light">
+              {order.contact}
             </Text>
           </View>
-
-          <Text className="font-bold">{order.name}</Text>
-          <Text className="text-[#5B5B5B] text-sm font-light">
-            {order.contact}
-          </Text>
+          <Text className="font-bold">#{orderNo}</Text>
         </View>
-        <Text className="font-bold">#{orderNo}</Text>
-      </View>
-      <Pressable
-        onPress={createTwoButtonAlert}
-        className={`h-12 items-center justify-center ${order.orderStatus === 0 || order.orderStatus === 2 ? "bg-gray-400" : "bg-[#D52041]"} bg-[#D52041] rounded-xl`}
-        disabled={order.orderStatus === 0 || order.orderStatus === 2}
-      >
-        <Text className="text-white">Despachar</Text>
-      </Pressable>
-    </View>
+        <Pressable
+          onPress={dispatchOrder}
+          className={`h-12 items-center justify-center ${order.orderStatus === 0 || order.orderStatus === 2 ? "bg-gray-400" : "bg-[#D52041]"} bg-[#D52041] rounded-xl`}
+          disabled={order.orderStatus === 0 || order.orderStatus === 2}
+        >
+          <Text className="text-white">Despachar</Text>
+        </Pressable>
+      </Animated.View>
+    </Pressable>
   );
 };
 

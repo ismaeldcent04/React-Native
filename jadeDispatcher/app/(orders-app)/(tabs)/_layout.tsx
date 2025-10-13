@@ -31,7 +31,7 @@ export default function OrderAppLayout() {
           ),
         }}
       />
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="all/index"
         options={{
           headerShown: false,
@@ -40,7 +40,7 @@ export default function OrderAppLayout() {
             <Ionicons size={28} name="infinite-outline" color={color} />
           ),
         }}
-      />
+      /> */}
     </Tabs>
   );
 }

@@ -24,7 +24,7 @@ const CustomInput = ({ label, icon, isPassword = false, ...rest }: Props) => {
         onPress={() => setShowPassword((prevValue) => !prevValue)}
       >
         <Ionicons
-          size={28}
+          size={32}
           color={"#A2A2A2"}
           className="absolute right-0 bottom-4"
           name={

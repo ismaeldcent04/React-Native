@@ -16,7 +16,7 @@ export const ordersDispatchedAction = async (pageSize = 5, pageNumber = 1) => {
       }
     );
     const orders = data.map((o) => OrderMapper.fromOrderResponseToEntity(o));
-    return orders.filter((x) => x.orderInfo.includes(sucursal ?? ""));
+    return orders.filter((x) => x.sucursal === sucursal);
   } catch (error) {
     console.log(error);
     throw error;
