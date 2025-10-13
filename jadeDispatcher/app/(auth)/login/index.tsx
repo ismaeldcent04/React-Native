@@ -7,6 +7,7 @@ import {
   ScrollView,
   Alert,
   ActivityIndicator,
+  Platform,
 } from "react-native";
 import React, { useState } from "react";
 
@@ -43,41 +44,47 @@ const LoginScreen = () => {
     }
   };
   return (
-    <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
-      <ScrollView>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : undefined}
+      style={{ flex: 1 }}
+    >
+      <ScrollView
+        contentContainerStyle={{ flexGrow: 1 }}
+        showsVerticalScrollIndicator={false}
+      >
         <View className="bg-[#d52041] flex flex-1">
-          <View className="w-full h-[45%] items-center justify-center">
+          <View className="flex-[0.6] items-center justify-center">
             <Image
               source={require("../../../assets/images/teriyaki.png")}
-              className=""
-              resizeMode="cover"
+              className="w-4/5 h-full"
+              resizeMode="contain"
             />
           </View>
 
-          <View className="">
-            <View className="bg-white rounded-2xl h-full flex items-center gap-10 pt-20">
-              <CustomInput
-                label="Username"
-                icon="person-circle-outline"
-                onChangeText={(value) => setForm({ ...form, username: value })}
-              />
-              <CustomInput
-                label="Password"
-                icon="eye-outline"
-                secureTextEntry
-                textContentType="password"
-                onChangeText={(value) => setForm({ ...form, password: value })}
-              />
-              <Pressable
-                onPress={onLogin}
-                disabled={isPosting}
-                className="bg-[#D52041] w-[70%] h-16 rounded-xl items-center justify-center mt-8"
-              >
-                <Text className="text-white font-martel-extraBold font-bold">
-                  Iniciar Sesion
-                </Text>
-              </Pressable>
-            </View>
+          <View className="bg-white rounded-t-2xl rounded-b-none  flex-[0.4] items-center gap-10 pt-20">
+            <CustomInput
+              label="Username"
+              icon="person-circle-outline"
+              value={form.username}
+              onChangeText={(value) => setForm({ ...form, username: value })}
+            />
+            <CustomInput
+              label="Password"
+              icon="eye-outline"
+              textContentType="password"
+              isPassword
+              value={form.password}
+              onChangeText={(value) => setForm({ ...form, password: value })}
+            />
+            <Pressable
+              onPress={onLogin}
+              disabled={isPosting}
+              className="bg-[#D52041] w-4/5 h-16 rounded-xl items-center justify-center mt-8"
+            >
+              <Text className="text-white font-martel-extraBold font-bold">
+                Iniciar Sesion
+              </Text>
+            </Pressable>
           </View>
         </View>
       </ScrollView>
