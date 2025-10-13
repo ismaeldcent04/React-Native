@@ -15,11 +15,11 @@
         "backgroundColor": "#E6F4FE"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.ismaeldcent04.expo_components_app"
     },
     "web": {
       "output": "static",
-
       "bundler": "metro"
     },
     "plugins": [
@@ -34,11 +34,18 @@
             "backgroundColor": "#000000"
           }
         }
-      ]
+      ],
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "dc70475a-3dcb-4192-99c8-0598e3e1f7ab"
+      }
     }
   }
 }

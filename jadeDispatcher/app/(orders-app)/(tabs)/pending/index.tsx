@@ -22,6 +22,8 @@ const PendingScreen = () => {
             pendingOrdersQuery.data?.pages.flatMap((pages) => pages) ?? []
           }
           loadNextPage={pendingOrdersQuery.fetchNextPage}
+          hasNextPage={pendingOrdersQuery.hasNextPage}
+          isFetchingNextPage={pendingOrdersQuery.isFetchingNextPage}
         />
       )}
     </View>

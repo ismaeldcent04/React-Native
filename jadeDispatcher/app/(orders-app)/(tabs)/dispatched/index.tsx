@@ -21,6 +21,8 @@ const DispatchedScreen = () => {
             dispatchedOrdersQuery.data?.pages.flatMap((pages) => pages) ?? []
           }
           loadNextPage={dispatchedOrdersQuery.fetchNextPage}
+          isFetchingNextPage={dispatchedOrdersQuery.isFetchingNextPage}
+          hasNextPage={dispatchedOrdersQuery.hasNextPage}
         />
       )}
     </View>

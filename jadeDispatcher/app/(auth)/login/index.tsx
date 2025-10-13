@@ -6,6 +6,7 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import React, { useState } from "react";
 
@@ -80,6 +81,11 @@ const LoginScreen = () => {
           </View>
         </View>
       </ScrollView>
+      {isPosting && (
+        <View className="absolute top-0 left-0 right-0 bottom-0 bg-black/40 items-center justify-center z-50">
+          <ActivityIndicator size="large" color="#fff" />
+        </View>
+      )}
     </KeyboardAvoidingView>
   );
 };

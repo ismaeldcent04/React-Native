@@ -1,4 +1,11 @@
-import { View, Text, Image, Pressable, Alert } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  Pressable,
+  Alert,
+  useWindowDimensions,
+} from "react-native";
 import React from "react";
 import { Order } from "@/infraestructure/interfaces/Order";
 import { Formatter } from "@/helpers/formatters/formatter";
@@ -9,6 +16,7 @@ interface Props {
 }
 
 const OrderCard = ({ order }: Props) => {
+  const { width } = useWindowDimensions();
   const { orderMutation } = useOrders();
   const orderNo =
     order.orderInfo !== null ? order.orderInfo.split("-")[2] : order.id;
@@ -49,7 +57,13 @@ const OrderCard = ({ order }: Props) => {
       ]
     );
   return (
-    <View className="h-48 w-[350px] bg-white  my-4 rounded-xl shadow p-4 gap-4 sm:w-[650px] ">
+    <View
+      className="h-48  bg-white  my-4 rounded-xl shadow p-4 gap-4  "
+      style={{
+        width: width * 0.9,
+        marginHorizontal: "auto",
+      }}
+    >
       <View className="flex-row  my-2 items-center justify-between">
         <Image
           className="h-14 w-14 shadow rounded-lg "

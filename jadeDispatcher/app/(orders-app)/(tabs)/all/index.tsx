@@ -17,6 +17,8 @@ const AllScreen = () => {
         <OrderList
           orders={allOrdersQuery.data?.pages.flatMap((pages) => pages) ?? []}
           loadNextPage={allOrdersQuery.fetchNextPage}
+          hasNextPage={allOrdersQuery.hasNextPage}
+          isFetchingNextPage={allOrdersQuery.isFetchingNextPage}
         />
       )}
     </View>
