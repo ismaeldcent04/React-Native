@@ -52,7 +52,7 @@ export const useOrders = () => {
     },
   });
 
-  const orderMutation = useMutation({
+  const upsertOrderMutation = useMutation({
     mutationFn: async (data: OrderRequest) => {
       await updateOrderAction(data.oid);
 
@@ -67,18 +67,28 @@ export const useOrders = () => {
       });
 
       queryClient.invalidateQueries({
-        queryKey: ["orders", "all"],
-      });
-
-      queryClient.invalidateQueries({
         queryKey: ["orders", "dispatched"],
       });
     },
   });
+
+  const softDeleteOrderMutation = useMutation({
+    mutationFn: async (id: number) => {
+      await updateOrderAction(id);
+    },
+
+    onSuccess() {
+      queryClient.invalidateQueries({
+        queryKey: ["orders", "pending"],
+      });
+    },
+  });
+
   return {
     pendingOrdersQuery,
     dispatchedOrdersQuery,
     allOrdersQuery,
-    orderMutation,
+    upsertOrderMutation,
+    softDeleteOrderMutation,
   };
 };
