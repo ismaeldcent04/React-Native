@@ -92,10 +92,48 @@ async function registerForPushNotificationsAsync() {
   }
 }
 
+let areListenersReady = false;
+
 export const usePushNotifications = () => {
   const [expoPushToken, setExpoPushToken] = useState("");
   const [notifications, setNotifications] = useState<
     Notifications.Notification[]
   >([]);
-  return {};
+
+  useEffect(() => {
+    if (areListenersReady) return;
+    registerForPushNotificationsAsync()
+      .then((token) => setExpoPushToken(token ?? ""))
+      .catch((error: any) => setExpoPushToken(`${error}`));
+  }, []);
+
+  useEffect(() => {
+    if (areListenersReady) return;
+
+    areListenersReady = true;
+    const notificationListener = Notifications.addNotificationReceivedListener(
+      (notification) => {
+        setNotifications((prevValue) => [notification, ...prevValue]);
+      }
+    );
+
+    const responseListener =
+      Notifications.addNotificationResponseReceivedListener((response) => {
+        console.log(response);
+      });
+
+    return () => {
+      notificationListener.remove();
+      responseListener.remove();
+    };
+  }, []);
+
+  return {
+    //Properties
+    expoPushToken,
+    notifications,
+
+    //Methods
+    sendPushNotification,
+  };
 };
