@@ -1,6 +1,7 @@
 import { authCheckStatus, authLogin } from "@/core/actions/auth/auth-actions";
 import { SecureStorageAdapter } from "@/helpers/adapters/secure-storage";
 import { User } from "@/infraestructure/interfaces/User";
+import { QueryClient } from "@tanstack/react-query";
 import { create } from "zustand";
 
 export enum AuthStatus {
@@ -27,6 +28,7 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
 
   login: async (username: string, password: string) => {
     const resp = await authLogin(username, password);
+
     return get().changeStatus(resp?.token, resp?.username);
   },
 

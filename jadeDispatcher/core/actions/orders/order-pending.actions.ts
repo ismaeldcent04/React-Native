@@ -7,7 +7,7 @@ export const ordersPendingAction = async (pageSize = 5, pageNumber = 1) => {
   try {
     const sucursal = await SecureStorageAdapter.getItem("username");
     const { data } = await orderApi.get<OrderResponse[]>(
-      "/Notificacion?filterOn=EstadoOrden&filterQuery=1&isAscending=false",
+      `/Notificacion?filters={"Sucursal":"${sucursal}", "EstadoOrden":1}&isAscending=false`,
       {
         params: {
           pageSize,
@@ -18,7 +18,7 @@ export const ordersPendingAction = async (pageSize = 5, pageNumber = 1) => {
 
     const orders = data.map((o) => OrderMapper.fromOrderResponseToEntity(o));
 
-    return orders.filter((x) => x.sucursal === sucursal);
+    return orders;
   } catch (error) {
     console.log(error);
     throw error;

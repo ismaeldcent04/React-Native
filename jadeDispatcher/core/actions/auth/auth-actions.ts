@@ -16,7 +16,7 @@ const returnUserToken = (
 export const authLogin = async (username: string, password: string) => {
   try {
     const { data } = await orderApi.get<OrderResponse[]>(
-      `/Notificacion?filterOn=Sucursal&filterQuery=${username}&pageNumber=1&pageSize=10`
+      `/Notificacion?filters={"Sucursal": "${username}"}&pageNumber=1&pageSize=10`
     );
     console.log(data);
 

@@ -14,9 +14,11 @@ import React, { useState } from "react";
 import { router } from "expo-router";
 import CustomInput from "@/presentation/auth/components/login/CustomInput";
 import { useAuthStore } from "@/presentation/auth/store/useAuthStore";
+import { useOrders } from "@/presentation/order/hooks/useOrders";
 
 const LoginScreen = () => {
   const { login } = useAuthStore();
+  const { pendingOrdersQuery, dispatchedOrdersQuery } = useOrders();
 
   const [isPosting, setIsPosting] = useState(false);
   const [form, setForm] = useState({
@@ -38,6 +40,8 @@ const LoginScreen = () => {
     setIsPosting(false);
 
     if (wasSuccessful) {
+      pendingOrdersQuery.refetch();
+      dispatchedOrdersQuery.refetch();
       router.replace("/pending");
     } else {
       Alert.alert("Error", "Usuario o password no son correctos");
