@@ -11,10 +11,10 @@ interface Props extends TextInputProps {
 const CustomInput = ({ label, icon, isPassword = false, ...rest }: Props) => {
   const [showPassword, setShowPassword] = useState(false);
   return (
-    <View className="w-[70%]">
+    <View className="w-[75%]">
       <Text className="font-martel-regular  text-[#970C0C]">{label}</Text>
       <TextInput
-        className="border-b-2 border-[#A2A2A2] py-4 text-sm text-[#A2A2A2]"
+        className="border-b-2 border-[#A2A2A2] py-4 text-sm text-[#A2A2A2] lg:px-2 lg:mt-2"
         placeholder={label}
         secureTextEntry={isPassword && !showPassword}
         {...rest}
@@ -26,7 +26,7 @@ const CustomInput = ({ label, icon, isPassword = false, ...rest }: Props) => {
         <Ionicons
           size={32}
           color={"#A2A2A2"}
-          className="absolute right-0 bottom-4"
+          className="absolute right-0 bottom-4 lg:bottom-2 lg:pr-1"
           name={
             isPassword
               ? showPassword

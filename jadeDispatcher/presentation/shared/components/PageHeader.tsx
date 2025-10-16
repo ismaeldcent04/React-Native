@@ -12,17 +12,17 @@ const PageHeader = () => {
     <View className="bg-[#D52041]">
       <View
         style={{ paddingTop: safeArea.top }}
-        className="flex flex-row justify-between items-center px-4 py-8"
+        className="flex flex-row justify-between items-center px-4 py-8 lg:h-24 lg:py-0"
       >
         <View className="flex text-white">
-          <Text className="text-white font-martel-light font-extralight py-2">
+          <Text className="text-white font-martel-light font-extralight py-2 lg:text-xl">
             Sucursal
           </Text>
-          <Text className="text-white font-martel-extraBold font-bold">
+          <Text className="text-white font-martel-extraBold font-bold lg:text-xl">
             {username}
           </Text>
         </View>
-        <Text className="text-white">Órdenes</Text>
+        <Text className="text-white lg:text-2xl">Órdenes</Text>
         {/* <Image
           className="w-10 h-10 rounded-full "
           resizeMode="cover"

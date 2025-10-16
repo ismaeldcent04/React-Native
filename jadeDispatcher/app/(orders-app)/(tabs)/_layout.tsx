@@ -8,7 +8,7 @@ import {
 import { useEffect } from "react";
 import { ActivityIndicatorComponent, View } from "react-native";
 
-export default function OrderAppLayout() {
+export default function OrderTabsLayout() {
   return (
     <Tabs screenOptions={{ tabBarActiveTintColor: "#D52041" }}>
       <Tabs.Screen

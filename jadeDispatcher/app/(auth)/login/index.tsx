@@ -8,6 +8,7 @@ import {
   Alert,
   ActivityIndicator,
   Platform,
+  useWindowDimensions,
 } from "react-native";
 import React, { useState } from "react";
 
@@ -25,12 +26,20 @@ const LoginScreen = () => {
     username: "",
     password: "",
   });
+  const { width, height } = useWindowDimensions();
+
+  const isDesktop = width >= 1024;
 
   const onLogin = async () => {
     const { username, password } = form;
 
     console.log(username, password);
-    if (username.length === 0 || password.length === 0) {
+
+    if (!username.trim() || !password.trim()) {
+      if (Platform.OS !== "web")
+        Alert.alert("Error", "Por favor llena todos los campos");
+      else alert("Por favor llena todos los campos");
+
       return;
     }
     setIsPosting(true);
@@ -44,28 +53,31 @@ const LoginScreen = () => {
       dispatchedOrdersQuery.refetch();
       router.replace("/pending");
     } else {
-      Alert.alert("Error", "Usuario o password no son correctos");
+      if (Platform.OS !== "web") Alert.alert("Error", "Credenciales inválidas");
+      else alert("Credenciales inválidas");
     }
   };
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : undefined}
       style={{ flex: 1 }}
+      className="lg:mx-0"
     >
       <ScrollView
         contentContainerStyle={{ flexGrow: 1 }}
+        scrollEnabled={!isDesktop}
         showsVerticalScrollIndicator={false}
       >
-        <View className="bg-[#d52041] flex flex-1">
-          <View className="flex-[0.6] items-center justify-center">
+        <View className="bg-[#d52041] flex flex-1 lg:items-center">
+          <View className=" flex-[0.6] lg:flex-[0.3] items-center justify-center">
             <Image
               source={require("../../../assets/images/teriyaki.png")}
-              className="w-4/5 h-full"
-              resizeMode="contain"
+              className="w-4/5 h-full  lg:h-20 lg:w-20"
+              resizeMode={isDesktop ? "none" : "contain"}
             />
           </View>
 
-          <View className="bg-white rounded-t-2xl rounded-b-none  flex-[0.4] items-center gap-10 pt-20">
+          <View className="bg-white rounded-t-2xl rounded-b-none flex-[0.4]  items-center gap-10 pt-20 lg:w-[40%] lg:flex-[0.6] lg:rounded-b-2xl lg:justify-center lg:pt-10">
             <CustomInput
               label="Username"
               icon="person-circle-outline"

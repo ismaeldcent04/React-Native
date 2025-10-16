@@ -6,7 +6,11 @@ import {
   useAuthStore,
 } from "@/presentation/auth/store/useAuthStore";
 import { useEffect } from "react";
-import { ActivityIndicatorComponent, View } from "react-native";
+import {
+  ActivityIndicator,
+  ActivityIndicatorComponent,
+  View,
+} from "react-native";
 
 export default function OrderAppLayout() {
   const { status, checkStatus } = useAuthStore();
@@ -18,7 +22,7 @@ export default function OrderAppLayout() {
   if (status === AuthStatus.checking) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicatorComponent />
+        <ActivityIndicator size={"large"} color={"#D52041"} />
       </View>
     );
   }
