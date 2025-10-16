@@ -3,15 +3,13 @@ import {
   Text,
   Image,
   Pressable,
-  Alert,
   useWindowDimensions,
   Animated,
-  Modal,
 } from "react-native";
 import React, { useRef, useState } from "react";
 import { Order } from "@/infraestructure/interfaces/Order";
 import { Formatter } from "@/helpers/formatters/formatter";
-import { useOrders } from "@/presentation/order/hooks/useOrders";
+
 import OrderModal from "./OrderModal";
 
 interface Props {
@@ -45,24 +43,6 @@ const OrderCard = ({ order }: Props) => {
       tension: 40,
       useNativeDriver: true,
     }).start();
-  };
-
-  const deleteOrder = () => {
-    Alert.alert(
-      "Eliminar pedido",
-      "Esta seguro/a de que quiere eliminar el pedido?",
-      [
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel",
-        },
-        {
-          text: "OK",
-          onPress: () => {},
-        },
-      ]
-    );
   };
 
   return (

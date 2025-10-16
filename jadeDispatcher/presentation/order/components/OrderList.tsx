@@ -1,4 +1,4 @@
-import { View, Text, FlatList, ActivityIndicator } from "react-native";
+import { View, FlatList, ActivityIndicator } from "react-native";
 import React from "react";
 import { Order } from "../../../infraestructure/interfaces/Order";
 import OrderCard from "./OrderCard";

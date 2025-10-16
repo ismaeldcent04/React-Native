@@ -3,7 +3,6 @@ import { ordersPendingAction } from "@/core/actions/orders/order-pending.actions
 import {
   useInfiniteQuery,
   useMutation,
-  useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
 

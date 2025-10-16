@@ -1,5 +1,5 @@
-import { View, Text, Modal, Pressable } from "react-native";
-import React from "react";
+import { View, Text, Modal, Pressable, ActivityIndicator } from "react-native";
+import React, { useState } from "react";
 import { useOrders } from "../hooks/useOrders";
 import { Order } from "@/infraestructure/interfaces/Order";
 
@@ -11,6 +11,7 @@ interface Props {
 }
 
 const OrderModal = ({ order, isVisible, setVisibility, type }: Props) => {
+  const [isClicked, setIsClicked] = useState(false);
   const { upsertOrderMutation, softDeleteOrderMutation } = useOrders();
 
   const handleDispatch = () => {
@@ -40,6 +41,16 @@ const OrderModal = ({ order, isVisible, setVisibility, type }: Props) => {
     // Aquí podrías agregar tu lógica real para eliminar la orden
     softDeleteOrderMutation.mutate(order.id);
   };
+
+  const handleClick = () => {
+    if (type === "delete") {
+      handleDelete();
+    } else {
+      handleDispatch();
+    }
+
+    setIsClicked(true);
+  };
   return (
     <Modal
       visible={isVisible}
@@ -47,6 +58,11 @@ const OrderModal = ({ order, isVisible, setVisibility, type }: Props) => {
       animationType="fade"
       onRequestClose={() => setVisibility(false)}
     >
+      {upsertOrderMutation.isPending && (
+        <View className="absolute top-0 left-0 right-0 bottom-0 bg-black/40 items-center justify-center z-50">
+          <ActivityIndicator size="large" color="#fff" />
+        </View>
+      )}
       <View className="flex-1 items-center justify-center bg-black/50">
         <View className="bg-white rounded-2xl p-6 w-80">
           <Text className="text-lg font-semibold mb-2">
@@ -61,7 +77,8 @@ const OrderModal = ({ order, isVisible, setVisibility, type }: Props) => {
             </Pressable>
             <Pressable
               className={`py-2 px-4 ${type === "delete" ? "bg-[#D52041]" : "bg-green-700"} rounded-lg`}
-              onPress={type === "delete" ? handleDelete : handleDispatch}
+              onPress={handleClick}
+              disabled={isClicked}
             >
               <Text className={` text-white font-semibold `}>
                 {type === "delete" ? "Eliminar" : "Confirmar"}
