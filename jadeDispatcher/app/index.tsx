@@ -1,31 +1,23 @@
-import { View, Text, ActivityIndicatorComponent } from "react-native";
-import React, { useEffect } from "react";
-import {
-  AuthStatus,
-  useAuthStore,
-} from "@/presentation/auth/store/useAuthStore";
+import React from "react";
 import { Redirect } from "expo-router";
+import {
+  useAuthStore,
+  AuthStatus,
+} from "@/presentation/auth/store/useAuthStore";
 
 const Index = () => {
-  const { status, checkStatus } = useAuthStore();
-
-  useEffect(() => {
-    checkStatus();
-  }, []);
-
-  if (status === AuthStatus.checking) {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicatorComponent />
-      </View>
-    );
-  }
+  const { status } = useAuthStore();
 
   if (status === AuthStatus.unauthenticated) {
-    return <Redirect href="/login" />;
+    return <Redirect href="/(auth)/login" />;
   }
 
-  return <Redirect href="/pending" />;
+  if (status === AuthStatus.authenticated) {
+    return <Redirect href="/pending" />;
+  }
+
+  // En teoría nunca se debería mostrar esto porque RootLayout maneja el checking
+  return null;
 };
 
 export default Index;
