@@ -17,36 +17,36 @@ export const useOrders = () => {
   const queryClient = useQueryClient();
   const pendingOrdersQuery = useInfiniteQuery({
     queryKey: ["orders", "pending"],
-    queryFn: ({ pageParam = 1 }) => ordersPendingAction(5, pageParam),
+    queryFn: ({ pageParam = 1 }) => ordersPendingAction(10, pageParam),
     staleTime: 10000,
     refetchInterval: 5000,
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
-      if (!lastPage || lastPage.length < 5) return undefined;
+      if (!lastPage || lastPage.length < 10) return undefined;
       return allPages.length + 1;
     },
   });
 
   const dispatchedOrdersQuery = useInfiniteQuery({
     queryKey: ["orders", "dispatched"],
-    queryFn: ({ pageParam = 1 }) => ordersDispatchedAction(5, pageParam),
+    queryFn: ({ pageParam = 1 }) => ordersDispatchedAction(10, pageParam),
     staleTime: 10000,
     refetchInterval: 5000,
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
-      if (!lastPage || lastPage.length < 5) return undefined;
+      if (!lastPage || lastPage.length < 10) return undefined;
       return allPages.length + 1;
     },
   });
 
   const allOrdersQuery = useInfiniteQuery({
     queryKey: ["orders", "all"],
-    queryFn: ({ pageParam = 1 }) => ordersAllAction(5, pageParam),
+    queryFn: ({ pageParam = 1 }) => ordersAllAction(10, pageParam),
     staleTime: 10000,
     refetchInterval: 5000,
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
-      if (!lastPage || lastPage.length < 5) return undefined;
+      if (!lastPage || lastPage.length < 10) return undefined;
       return allPages.length + 1;
     },
   });

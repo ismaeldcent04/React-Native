@@ -69,7 +69,7 @@ const LoginScreen = () => {
         showsVerticalScrollIndicator={false}
       >
         <View className="bg-[#d52041] flex flex-1 lg:items-center">
-          <View className=" flex-[0.6] lg:flex-[0.3] items-center justify-center">
+          <View className=" h-[40%] lg:h-[30%] items-center justify-center">
             <Image
               source={require("../../../assets/images/teriyaki.png")}
               className="w-4/5 h-full  lg:h-20 lg:w-20"
@@ -77,7 +77,7 @@ const LoginScreen = () => {
             />
           </View>
 
-          <View className="bg-white rounded-t-2xl rounded-b-none flex-[0.4]  items-center gap-10 pt-20 lg:w-[40%] lg:flex-[0.6] lg:rounded-b-2xl lg:justify-center lg:pt-10">
+          <View className="bg-white rounded-t-2xl rounded-b-none h-[60%] items-center gap-10 pt-20 lg:w-[40%] lg:h-[55%] lg:rounded-b-2xl lg:justify-center lg:pt-10">
             <CustomInput
               label="Username"
               icon="person-circle-outline"
@@ -95,7 +95,7 @@ const LoginScreen = () => {
             <Pressable
               onPress={onLogin}
               disabled={isPosting}
-              className="bg-[#D52041] w-4/5 h-16 rounded-xl items-center justify-center mt-8"
+              className="bg-[#D52041] w-4/5 h-16 rounded-xl items-center justify-center mt-4 mb-8"
             >
               <Text className="text-white font-martel-extraBold font-bold">
                 Iniciar Sesión
