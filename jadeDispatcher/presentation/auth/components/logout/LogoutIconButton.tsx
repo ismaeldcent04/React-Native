@@ -7,8 +7,13 @@ import { router } from "expo-router";
 const LogoutIconButton = () => {
   const { logout } = useAuthStore();
 
+  const handleLogout = () => {
+    logout();
+    //router.replace("/(auth)/login");
+  };
+
   return (
-    <TouchableOpacity className="mr-2" onPress={logout}>
+    <TouchableOpacity className="mr-2" onPress={handleLogout}>
       <Ionicons name="log-out-outline" size={30} color={"white"} />
     </TouchableOpacity>
   );

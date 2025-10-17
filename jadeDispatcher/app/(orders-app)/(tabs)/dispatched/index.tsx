@@ -1,5 +1,5 @@
 import { View, FlatList, Text } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 
 import PageHeader from "@/presentation/shared/components/PageHeader";
 import { useOrders } from "@/presentation/order/hooks/useOrders";
@@ -8,6 +8,7 @@ import OrderList from "@/presentation/order/components/OrderList";
 
 const DispatchedScreen = () => {
   const { dispatchedOrdersQuery } = useOrders();
+
   return (
     <View className="w-full flex-1">
       <PageHeader />

@@ -29,7 +29,7 @@ const OrderList = ({
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => <OrderCard order={item} />}
       onEndReached={loadNextPage}
-      onEndReachedThreshold={0.9}
+      onEndReachedThreshold={0.8}
       showsHorizontalScrollIndicator={false}
       ListFooterComponent={() =>
         isFetchingNextPage && (

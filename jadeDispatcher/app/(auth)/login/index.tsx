@@ -98,7 +98,7 @@ const LoginScreen = () => {
               className="bg-[#D52041] w-4/5 h-16 rounded-xl items-center justify-center mt-8"
             >
               <Text className="text-white font-martel-extraBold font-bold">
-                Iniciar Sesion
+                Iniciar Sesión
               </Text>
             </Pressable>
           </View>

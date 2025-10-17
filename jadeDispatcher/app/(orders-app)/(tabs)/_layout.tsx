@@ -6,9 +6,19 @@ import {
   useAuthStore,
 } from "@/presentation/auth/store/useAuthStore";
 import { useEffect } from "react";
-import { ActivityIndicatorComponent, View } from "react-native";
+import {
+  ActivityIndicatorComponent,
+  Platform,
+  useWindowDimensions,
+  View,
+} from "react-native";
 
 export default function OrderTabsLayout() {
+  const { width } = useWindowDimensions();
+  useEffect(() => {
+    if (width >= 1024 || Platform.OS === "web")
+      document.title = "JadeDispatcher";
+  });
   return (
     <Tabs screenOptions={{ tabBarActiveTintColor: "#D52041" }}>
       <Tabs.Screen
