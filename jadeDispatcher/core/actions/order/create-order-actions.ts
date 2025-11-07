@@ -7,7 +7,7 @@ export const createOrderAction = async (data: OrderRequest) => {
   try {
     const { data: order } = await orderApi.post<OrderResponse>(
       `/Notificacion/`,
-      { ...data, estadoOrden: 2, fecha: new Date().toISOString() }
+      { ...data, estadoOrden: 1, fecha: new Date().toISOString() }
     );
 
     console.log("CREATE: " + JSON.stringify(order));

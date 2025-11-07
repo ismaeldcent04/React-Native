@@ -32,6 +32,20 @@ export default function OrderTabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="notnotified/index"
+        options={{
+          headerShown: false,
+          title: "Sin notificar",
+          tabBarIcon: ({ color }) => (
+            <Ionicons
+              size={28}
+              name="notifications-off-outline"
+              color={color}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="dispatched/index"
         options={{
           headerShown: false,
@@ -41,16 +55,6 @@ export default function OrderTabsLayout() {
           ),
         }}
       />
-      {/* <Tabs.Screen
-        name="all/index"
-        options={{
-          headerShown: false,
-          title: "Todas",
-          tabBarIcon: ({ color }) => (
-            <Ionicons size={28} name="infinite-outline" color={color} />
-          ),
-        }}
-      /> */}
     </Tabs>
   );
 }

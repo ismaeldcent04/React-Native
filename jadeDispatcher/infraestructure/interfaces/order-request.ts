@@ -1,8 +1,6 @@
 export interface OrderRequest {
   oid: number;
   clienternc: string;
-  clienteCodigo: number;
-  clienteNombre: string;
   tipoNotificacion: string;
   titulo: string;
   cuerpo: string;

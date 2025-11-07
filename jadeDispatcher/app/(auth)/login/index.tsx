@@ -32,9 +32,6 @@ const LoginScreen = () => {
 
   const onLogin = async () => {
     const { username, password } = form;
-
-    console.log(username, password);
-
     if (!username.trim() || !password.trim()) {
       if (Platform.OS !== "web")
         Alert.alert("Error", "Por favor llena todos los campos");

@@ -24,10 +24,8 @@ const OrderCard = ({ order }: Props) => {
   const [showDispatchModal, setShowDispatchModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-  const orderNo =
-    order.orderInfo !== null ? order.orderInfo.split("-")[2] : order.id;
-
-  const color = order.orderStatus === 1 ? "#EEA736" : "#1A7815";
+  const color =
+    order.orderStatus === 0 || order.orderStatus === 1 ? "#EEA736" : "#1A7815";
 
   const scaleAnim = useRef(new Animated.Value(1)).current;
 
@@ -116,7 +114,9 @@ const OrderCard = ({ order }: Props) => {
                   }}
                 >
                   <Text style={{ color: color, fontSize: isDesktop ? 14 : 10 }}>
-                    {order.orderStatus === 1 ? "Pedido" : "Despachado"}
+                    {order.orderStatus === 0 || order.orderStatus === 1
+                      ? "Pedido"
+                      : "Despachado"}
                   </Text>
                   <Text
                     style={{
@@ -124,7 +124,7 @@ const OrderCard = ({ order }: Props) => {
                       fontSize: isDesktop ? 14 : 10,
                     }}
                   >
-                    {`${Formatter.getRelativeDayLabel(order.date.toString())} - ${Formatter.date(order.date)}`}
+                    {`${Formatter.getRelativeDayLabel(order.dispatchedDate ? order.dispatchedDate.toString() : order.date.toString())} - ${Formatter.date(order.dispatchedDate !== null ? order.dispatchedDate : order.date)}`}
                   </Text>
                 </View>
 
@@ -147,7 +147,7 @@ const OrderCard = ({ order }: Props) => {
                     alignItems: isDesktop ? "flex-start" : undefined,
                   }}
                 >
-                  <Text className="font-bold">#{orderNo}</Text>
+                  <Text className="font-bold">#{order.orderNo}</Text>
                 </View>
               </View>
             </View>
@@ -156,14 +156,16 @@ const OrderCard = ({ order }: Props) => {
             <Pressable
               onPress={() => setShowDispatchModal(true)}
               className={`h-12 items-center justify-center rounded-xl ${
-                order.orderStatus === 0 || order.orderStatus === 2
-                  ? "bg-gray-400"
-                  : "bg-[#D52041]"
+                order.orderStatus === 2 ? "bg-gray-400" : "bg-[#D52041]"
               }`}
               style={{ width: isDesktop ? "40%" : "100%" }}
-              disabled={order.orderStatus === 0 || order.orderStatus === 2}
+              disabled={order.orderStatus === 2}
             >
-              <Text className="text-white">Despachar</Text>
+              <Text className="text-white">
+                {order.orderStatus === 0
+                  ? "Despachado manualmente"
+                  : "Despachar"}
+              </Text>
             </Pressable>
           </Animated.View>
         ) : (
@@ -196,7 +198,9 @@ const OrderCard = ({ order }: Props) => {
                     className=" text-[10px] lg:text-sm"
                     style={{ color: color }}
                   >
-                    {order.orderStatus === 1 ? "Pedido" : "Despachado"}
+                    {order.orderStatus === 0 || order.orderStatus === 1
+                      ? "Pedido"
+                      : "Despachado"}
                   </Text>
                   <Text className="text-[#838383] text-[10px] lg:text-sm">
                     {`${Formatter.getRelativeDayLabel(order.date.toString())} - ${Formatter.date(order.date)}`}
@@ -208,14 +212,18 @@ const OrderCard = ({ order }: Props) => {
                   {order.contact}
                 </Text>
               </View>
-              <Text className="font-bold lg:mx-6">#{orderNo}</Text>
+              <Text className="font-bold lg:mx-6">#{order.orderNo}</Text>
             </View>
             <Pressable
               onPress={() => setShowDispatchModal(true)}
-              className={`h-12 items-center justify-center ${order.orderStatus === 0 || order.orderStatus === 2 ? "bg-gray-400" : "bg-[#D52041]"} bg-[#D52041] rounded-xl lg:w-[40%]`}
-              disabled={order.orderStatus === 0 || order.orderStatus === 2}
+              className={`h-12 items-center justify-center ${order.orderStatus === 2 ? "bg-gray-400" : "bg-[#D52041]"} bg-[#D52041] rounded-xl lg:w-[40%]`}
+              disabled={order.orderStatus === 2}
             >
-              <Text className="text-white">Despachar</Text>
+              <Text className="text-white">
+                {order.orderStatus === 0
+                  ? "Despachado manualmente"
+                  : "Despachar"}
+              </Text>
             </Pressable>
           </Animated.View>
         )}

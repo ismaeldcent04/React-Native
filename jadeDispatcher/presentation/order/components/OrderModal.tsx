@@ -12,21 +12,20 @@ interface Props {
 
 const OrderModal = ({ order, isVisible, setVisibility, type }: Props) => {
   const [isClicked, setIsClicked] = useState(false);
-  const { upsertOrderMutation, softDeleteOrderMutation } = useOrders();
+  const { upsertOrderMutation, softDeleteOrderMutation, updateOrderMutation } =
+    useOrders();
 
   const handleDispatch = () => {
     setVisibility(false);
     upsertOrderMutation.mutate({
       oid: order.id,
-      clienternc: order.rnc,
-      clienteCodigo: order.companyCode,
-      clienteNombre: order.companyName,
-      tipoNotificacion: order.orderInfo,
+      clienternc: "130389586",
+      tipoNotificacion: `Pedidos-${order.sucursal}-${order.orderNo}`,
       estadoOrden: order.orderStatus,
       cuerpo: `Hola ${order.name} 👋🏼, tu pedido en Jade Teriyaki ya está *LISTO* para retirar. ¡Te esperamos!`,
       titulo: "Notificacion de estado de orden (Jade Teriyaki)",
       firma: order.name,
-      puesto: "",
+      puesto: "Cliente",
       fecha: new Date(),
       fechaRecibido: order.date,
       enviado: false,
@@ -34,6 +33,11 @@ const OrderModal = ({ order, isVisible, setVisibility, type }: Props) => {
       sucursal: order.sucursal,
       contacto: order.contact,
     });
+  };
+
+  const handleManualDispatch = () => {
+    setVisibility(false);
+    updateOrderMutation.mutate(order.id);
   };
 
   const handleDelete = () => {
@@ -46,7 +50,7 @@ const OrderModal = ({ order, isVisible, setVisibility, type }: Props) => {
     if (type === "delete") {
       handleDelete();
     } else {
-      handleDispatch();
+      order.orderStatus === 1 ? handleDispatch() : handleManualDispatch();
     }
 
     setIsClicked(true);

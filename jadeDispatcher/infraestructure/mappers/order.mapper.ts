@@ -6,16 +6,15 @@ export class OrderMapper {
   static fromOrderResponseToEntity(order: OrderResponse): Order {
     return {
       id: order.oid,
-      name: order.firma,
+      name: order.nombre,
       date: order.fecha,
-      orderStatus: order.estadoOrden,
-      orderInfo: order.tipoNotificacion,
+      orderStatus: order.estado,
+      orderNo: order.control,
       sucursal: order.sucursal,
-      contact: order.notificacionContactos[0]?.contacto,
-      rnc: order.rnc,
-      companyCode: order.clienteCodigo,
-      companyName: order.clienteNombre,
-      body: order.cuerpo,
+      contact: order.telefono,
+      notified: order.notificado,
+      dispatched: order.despachado,
+      dispatchedDate: order.despachadoFecha,
     };
   }
 }
