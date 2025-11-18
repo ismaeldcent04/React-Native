@@ -20,7 +20,7 @@ const OrderModal = ({ order, isVisible, setVisibility, type }: Props) => {
     upsertOrderMutation.mutate({
       oid: order.id,
       clienternc: "130389586",
-      tipoNotificacion: `Pedidos-${order.sucursal}-${order.orderNo}`,
+      tipoNotificacion: `Pedidos-${order.sucursal}`,
       estadoOrden: order.orderStatus,
       cuerpo: `Hola ${order.name} 👋🏼, tu pedido en Jade Teriyaki ya está *LISTO* para retirar. ¡Te esperamos!`,
       titulo: "Notificacion de estado de orden (Jade Teriyaki)",
