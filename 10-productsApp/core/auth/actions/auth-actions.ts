@@ -1,3 +1,4 @@
+import axios from "axios";
 import { productsApi } from "../api/productsApi";
 import { User } from "../interfaces/user";
 
@@ -21,15 +22,19 @@ const returnUserToken = (data: AuthResponse): { user: User; token: string } => {
 
 export const authLogin = async (email: string, password: string) => {
   email = email.toLocaleLowerCase();
+  console.log(productsApi.getUri());
 
   try {
-    const { data } = await productsApi.post<AuthResponse>("/auth/login", {
+    const { data } = await axios.post("http://localhost:3000/api/auth/login", {
       email,
       password,
     });
 
+    console.log(data);
+
     return returnUserToken(data);
   } catch (error) {
+    console.log(error);
     return null;
   }
 };

@@ -1,12 +1,76 @@
-import { View, Text } from "react-native";
+import {
+  View,
+  Text,
+  KeyboardAvoidingView,
+  useWindowDimensions,
+  TextInput,
+  ScrollView,
+} from "react-native";
 import React from "react";
 import { ThemedText } from "@/presentation/theme/components/themed-text";
+import ThemedTextInput from "@/presentation/theme/components/ThemedTextInput";
+import ThemedButton from "@/presentation/theme/components/ThemedButton";
+import ThemedLink from "@/presentation/theme/components/ThemedLink";
 
 const RegisterScreen = () => {
+  const { height } = useWindowDimensions();
   return (
-    <View>
-      <ThemedText>RegisterScreen</ThemedText>
-    </View>
+    <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
+      <ScrollView
+        style={{
+          paddingHorizontal: 40,
+        }}
+      >
+        <View
+          style={{
+            paddingTop: height * 0.35,
+          }}
+        >
+          <ThemedText type="title">Crear cuenta</ThemedText>
+          <ThemedText style={{ color: "grey" }}>
+            Por favor crea una cuenta para continuar
+          </ThemedText>
+        </View>
+
+        <View style={{ marginTop: 20 }}>
+          <ThemedTextInput
+            placeholder="Nombre Completo"
+            autoCapitalize="words"
+            icon="person-outline"
+          />
+          <ThemedTextInput
+            placeholder="Correo electronico"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            icon="mail-outline"
+          />
+          <ThemedTextInput
+            placeholder="Password"
+            secureTextEntry
+            autoCapitalize="none"
+            icon="lock-closed-outline"
+          />
+        </View>
+
+        <View style={{ marginTop: 10 }} />
+
+        <ThemedButton icon="arrow-forward-outline">Crear cuentar</ThemedButton>
+
+        <View style={{ marginTop: 50 }} />
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <ThemedText> ¿Ya tienes cuenta?</ThemedText>
+          <ThemedLink href="/auth/login" style={{ marginHorizontal: 5 }}>
+            Ingresar
+          </ThemedLink>
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
