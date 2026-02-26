@@ -7,7 +7,7 @@ export const ordersPendingAction = async (pageSize = 5, pageNumber = 1) => {
   try {
     const sucursal = await SecureStorageAdapter.getItem("username");
     const { data } = await orderApi.get<OrderResponse[]>(
-      `/Notificacion?filters={"Sucursal":"${sucursal}", "EstadoOrden":1}&isAscending=false`,
+      `/Pedidos?filters={"Sucursal":"${sucursal}", "Estado":1}&isAscending=false`,
       {
         params: {
           pageSize,

@@ -6,7 +6,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 
-import { ordersAllAction } from "../../../core/actions/orders/order-all.actions";
+import { ordersNoNotifiedAction } from "../../../core/actions/orders/order-notNotified.actions";
 import { Order } from "@/infraestructure/interfaces/Order";
 import { updateOrderAction } from "@/core/actions/order/order-update.actions";
 import { OrderRequest } from "@/infraestructure/interfaces/order-request";
@@ -39,9 +39,9 @@ export const useOrders = () => {
     },
   });
 
-  const allOrdersQuery = useInfiniteQuery({
-    queryKey: ["orders", "all"],
-    queryFn: ({ pageParam = 1 }) => ordersAllAction(10, pageParam),
+  const notNotifiedOrdersQuery = useInfiniteQuery({
+    queryKey: ["orders", "notNotified"],
+    queryFn: ({ pageParam = 1 }) => ordersNoNotifiedAction(10, pageParam),
     staleTime: 10000,
     refetchInterval: 5000,
     initialPageParam: 1,
@@ -53,7 +53,7 @@ export const useOrders = () => {
 
   const upsertOrderMutation = useMutation({
     mutationFn: async (data: OrderRequest) => {
-      await updateOrderAction(data.oid);
+      await updateOrderAction(data.oid, 2);
 
       const order = await createOrderAction(data);
 
@@ -68,12 +68,16 @@ export const useOrders = () => {
       queryClient.invalidateQueries({
         queryKey: ["orders", "dispatched"],
       });
+
+      queryClient.invalidateQueries({
+        queryKey: ["orders", "notNotified"],
+      });
     },
   });
 
   const softDeleteOrderMutation = useMutation({
     mutationFn: async (id: number) => {
-      await updateOrderAction(id);
+      await updateOrderAction(id, 3);
     },
 
     onSuccess() {
@@ -83,11 +87,24 @@ export const useOrders = () => {
     },
   });
 
+  const updateOrderMutation = useMutation({
+    mutationFn: async (id: number) => {
+      await updateOrderAction(id, 2);
+    },
+
+    onSuccess() {
+      queryClient.invalidateQueries({
+        queryKey: ["orders", "notNotified"],
+      });
+    },
+  });
+
   return {
     pendingOrdersQuery,
     dispatchedOrdersQuery,
-    allOrdersQuery,
+    notNotifiedOrdersQuery,
     upsertOrderMutation,
     softDeleteOrderMutation,
+    updateOrderMutation,
   };
 };

@@ -3,11 +3,10 @@ export interface Order {
   name: string;
   date: Date;
   orderStatus: number | null;
-  orderInfo: string;
+  orderNo: number;
   contact: string;
   sucursal: string;
-  rnc: string;
-  companyCode: number;
-  companyName: string;
-  body: string;
+  notified: boolean;
+  dispatched: boolean;
+  dispatchedDate: Date | null;
 }
