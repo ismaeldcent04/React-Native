@@ -43,6 +43,7 @@ export const authCheckStatus = async () => {
   try {
     const { data } =
       await consultingApi.get<AuthResponse>("/Auth/check-status");
+    console.log(data);
     return returnUserToken(data);
   } catch (error) {
     console.log(error);
