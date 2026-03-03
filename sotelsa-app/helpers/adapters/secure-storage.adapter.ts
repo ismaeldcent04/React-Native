@@ -4,7 +4,6 @@ import { Alert } from "react-native";
 export class SecureStorageAdapter {
   static async setItem(key: string, value: string) {
     try {
-      console.log(key, value);
       await SecureStore.setItemAsync(key, value);
     } catch (error) {
       console.log(error);
@@ -15,7 +14,7 @@ export class SecureStorageAdapter {
 
   static async getItem(key: string) {
     try {
-      await SecureStore.getItemAsync(key);
+      return await SecureStore.getItemAsync(key);
     } catch (error) {
       console.log(error);
       Alert.alert("Error", "Failed to get data");

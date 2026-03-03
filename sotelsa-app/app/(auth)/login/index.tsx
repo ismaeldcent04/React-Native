@@ -26,11 +26,13 @@ const LoginScreen = () => {
     if (form.username.length === 0 || form.password.length === 0) return;
     setIsPosting(true);
 
+    console.log(form);
+
     const wasSuccessful = await login(form.username, form.password);
     setIsPosting(false);
 
     if (wasSuccessful) {
-      router.replace("/(consulting-app)/(inventory)");
+      router.replace("/(consulting-app)/(tabs)/summary");
     }
   };
 

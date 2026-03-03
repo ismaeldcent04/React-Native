@@ -1,7 +1,8 @@
 import { View, Text, ActivityIndicator } from "react-native";
 import React, { useEffect } from "react";
 import { useAuthStore } from "@/presentation/auth/store/useAuthStore";
-import { Redirect, Stack } from "expo-router";
+import { Redirect, Slot, Stack } from "expo-router";
+import LogoutIconButton from "@/presentation/auth/components/LogoutIconButton";
 
 const CheckAuthenticationLayout = () => {
   const { status, checkStatus } = useAuthStore();
@@ -26,19 +27,10 @@ const CheckAuthenticationLayout = () => {
   }
 
   if (status === "unauthenticated") {
-    return <Redirect href="/auth/login" />;
+    return <Redirect href="/(auth)/login" />;
   }
 
-  return (
-    <Stack>
-      <Stack.Screen
-        name="(inventory)/index"
-        options={{
-          title: "Inventory",
-        }}
-      />
-    </Stack>
-  );
+  return <Slot />;
 };
 
 export default CheckAuthenticationLayout;

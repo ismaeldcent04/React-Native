@@ -11,8 +11,6 @@ consultingApi.interceptors.request.use(async (config) => {
     config.headers.Authorization = `Bearer ${token}`;
   }
 
-  console.log(token);
-
   return config;
 });
 

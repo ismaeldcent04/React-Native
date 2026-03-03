@@ -16,18 +16,19 @@ export interface AuthState {
 }
 
 export const useAuthStore = create<AuthState>()((set, get) => ({
-  status: "unauthenticated",
+  status: "checking",
   token: undefined,
   user: undefined,
 
   changeStatus: async (token?: string, user?: User) => {
     if (!token || !user) {
       set({ status: "unauthenticated", token: undefined, user: undefined });
+      await SecureStorageAdapter.deleteItem("token");
       return false;
     }
 
-    set({ status: "authenticated", token, user });
-
+    set({ status: "authenticated", token: token, user: user });
+    console.log("ok");
     await SecureStorageAdapter.setItem("token", token);
     return true;
   },
@@ -40,7 +41,6 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
 
   checkStatus: async () => {
     const resp = await authCheckStatus();
-
     get().changeStatus(resp?.token, resp?.user);
   },
 
