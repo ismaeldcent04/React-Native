@@ -1,4 +1,4 @@
-import { consultingApi } from "../api/consultingApi";
+import { consultingApi } from "../../api/consultingApi";
 import { User } from "../interface/user";
 
 export interface AuthResponse {

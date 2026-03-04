@@ -7,8 +7,9 @@ import {
   Platform,
   Button,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ThemedText } from "@/presentation/theme/components/themed-text";
 import StatItem from "@/presentation/summary/components/StatItem";
 import { Ionicons } from "@expo/vector-icons";
@@ -16,6 +17,7 @@ import DailyItem from "@/presentation/summary/components/DailyItem";
 import TabItem from "@/presentation/summary/components/TabItem";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { useAuthStore } from "@/presentation/auth/store/useAuthStore";
+import { useSummaries } from "@/presentation/summary/hooks/useSummaries";
 
 const SummaryScreen = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -23,6 +25,20 @@ const SummaryScreen = () => {
   const { logout } = useAuthStore();
   const [show, setShow] = useState(false);
   const [filtered, setFiltered] = useState(false);
+
+  const { summariesQuery, loadNexPage } = useSummaries();
+
+  useEffect(() => {
+    summariesQuery.data;
+  }, []);
+
+  if (summariesQuery.isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator />
+      </View>
+    );
+  }
 
   return (
     <View className="flex-1 bg-[#f6f7f8]">

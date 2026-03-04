@@ -13,9 +13,19 @@ import { useEffect, useState } from "react";
 import { useAuthStore } from "@/presentation/auth/store/useAuthStore";
 import { ActivityIndicator, View } from "react-native";
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 export const unstable_settings = {
   anchor: "(tabs)",
 };
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+    },
+  },
+});
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -30,17 +40,25 @@ export default function RootLayout() {
 
   if (checking || status === "checking") {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size="large" color="#D52041" />
-      </View>
+      <QueryClientProvider client={queryClient}>
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <ActivityIndicator size="large" color="#D52041" />
+        </View>
+      </QueryClientProvider>
     );
   }
 
   return (
     <GestureHandlerRootView>
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Slot />
-      </ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider
+          value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+        >
+          <Slot />
+        </ThemeProvider>
+      </QueryClientProvider>
     </GestureHandlerRootView>
   );
 }
