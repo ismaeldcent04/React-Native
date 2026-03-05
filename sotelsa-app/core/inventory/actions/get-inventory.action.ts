@@ -5,11 +5,18 @@ export const getInventory = async (
   pageSize = 10,
   pageNumber = 1,
   client = 1,
+  articulo = "",
 ) => {
   try {
-    const { data } = await consultingApi.get<Inventory[]>(
-      `Inventario?filters={"cliente":1}`,
-    );
+    const filters = {
+      cliente: client,
+      articulo: articulo,
+    };
+    const { data } = await consultingApi.get<Inventory[]>(`Inventario`, {
+      params: {
+        filters: JSON.stringify(filters),
+      },
+    });
     console.log(data);
     return data;
   } catch (error) {

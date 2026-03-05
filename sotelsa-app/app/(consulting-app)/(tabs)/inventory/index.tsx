@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -55,7 +55,8 @@ const inventoryData = [
 ];
 
 export default function InventoryScreen() {
-  const { inventoryQuery, loadNexPage } = useInventory();
+  const [productSearch, setProductSearch] = useState("");
+  const { inventoryQuery, loadNexPage } = useInventory(productSearch);
 
   return (
     <SafeAreaView className="flex-1 bg-gray-100 dark:bg-[#101922]">
@@ -81,6 +82,8 @@ export default function InventoryScreen() {
               placeholder="Search by name or SKU..."
               className="flex-1 ml-2 text-base text-black dark:text-white"
               placeholderTextColor="gray"
+              value={productSearch}
+              onChangeText={(value) => setProductSearch(value)}
             />
           </View>
         </View>

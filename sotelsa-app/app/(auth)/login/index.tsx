@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   KeyboardAvoidingView,
   Pressable,
   ScrollView,
@@ -39,7 +40,7 @@ const LoginScreen = () => {
   return (
     <KeyboardAvoidingView
       behavior="padding"
-      className="flex-1 bg-[#0A0C10] justify-center px-6"
+      className="flex-1  bg-white dark:bg-[#0A0C10] justify-center lg:items-center lg:w-full px-6 "
     >
       {/* Background abstract shapes */}
       {/* <LinearGradient
@@ -52,19 +53,20 @@ const LoginScreen = () => {
       /> */}
 
       <ScrollView
+        className=" lg:w-[30%]"
         contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
         showsVerticalScrollIndicator={false}
       >
         {/* Glass Card */}
         <View
-          className="rounded-3xl p-8 border border-white/10 bg-white/5"
-          // style={{
-          //   shadowColor: "#000",
-          //   shadowOpacity: 0.4,
-          //   shadowRadius: 20,
-          //   shadowOffset: { width: 0, height: 10 },
-          //   elevation: 10, // Android
-          // }}
+          className="  rounded-3xl p-8 border border-gray-300]   dark:border-white/10 dark:bg-white/5 "
+          style={{
+            shadowColor: "#000",
+            shadowOpacity: 0.4,
+            shadowRadius: 20,
+            shadowOffset: { width: 0, height: 10 },
+            elevation: 10, // Android
+          }}
         >
           {/* Logo Section */}
           <View className="items-center mb-10">
@@ -78,7 +80,7 @@ const LoginScreen = () => {
 
           {/* Title */}
           <View className="mb-10 items-center">
-            <Text className="text-4xl font-extrabold text-white mb-2">
+            <Text className="text-4xl font-extrabold dark:text-white mb-2">
               Bienvenido
             </Text>
             <Text className="text-gray-400 text-sm">
@@ -92,7 +94,7 @@ const LoginScreen = () => {
               Username
             </Text>
 
-            <View className="flex-row items-center bg-white/5 border border-white/10 rounded-2xl px-4 h-14">
+            <View className="flex-row items-center bg-gray-100 border border-gray-300 dark:bg-white/5  dark:border-white/10 rounded-2xl px-4 h-14">
               <Ionicons name="person-outline" size={20} color="#6B7280" />
               <TextInput
                 placeholder="Email or Username"
@@ -112,7 +114,7 @@ const LoginScreen = () => {
               </Text>
             </View>
 
-            <View className="flex-row items-center bg-white/5 border border-white/10 rounded-2xl px-4 h-14">
+            <View className="flex-row items-center bg-gray-100 border border-gray-300 dark:bg-white/5  dark:border-white/10 rounded-2xl px-4 h-14">
               <Ionicons name="lock-closed-outline" size={20} color="#6B7280" />
 
               <TextInput
@@ -137,7 +139,7 @@ const LoginScreen = () => {
           {/* Button */}
           <Pressable
             onPress={onLogin}
-            className="mt-4 p-2 flex-1 flex-row justify-center items-center bg-[#06b6d4] rounded-lg h-12 "
+            className="mt-4 p-2 w-full flex flex-row justify-center items-center bg-[#06b6d4] rounded-lg h-12 "
             disabled={isPosting}
           >
             <Text className="text-white font-extrabold tracking-wide">
@@ -157,6 +159,11 @@ const LoginScreen = () => {
           </Pressable>
         </View> */}
       </ScrollView>
+      {isPosting && (
+        <View className="absolute top-0 left-0 right-0 bottom-0 bg-black/40 items-center justify-center z-50">
+          <ActivityIndicator size="large" color="#fff" />
+        </View>
+      )}
     </KeyboardAvoidingView>
   );
 };

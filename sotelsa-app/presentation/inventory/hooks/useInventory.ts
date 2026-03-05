@@ -2,14 +2,14 @@ import { getInventory } from "@/core/inventory/actions/get-inventory.action";
 import { useAuthStore } from "@/presentation/auth/store/useAuthStore";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
-export const useInventory = () => {
+export const useInventory = (product: string) => {
   const { user } = useAuthStore();
 
   console.log(user);
   const inventoryQuery = useInfiniteQuery({
-    queryKey: ["inventory", "infinite"],
+    queryKey: ["inventory", "infinite", product],
     queryFn: ({ pageParam = 1 }) =>
-      getInventory(20, pageParam, Number(user?.client)),
+      getInventory(20, pageParam, Number(user?.client), product),
     staleTime: 1000 * 60 * 60,
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {

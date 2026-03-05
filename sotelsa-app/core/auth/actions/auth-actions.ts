@@ -32,6 +32,8 @@ export const authLogin = async (username: string, password: string) => {
       password,
     });
 
+    console.log(data);
+
     return returnUserToken(data);
   } catch (err) {
     console.log(err);

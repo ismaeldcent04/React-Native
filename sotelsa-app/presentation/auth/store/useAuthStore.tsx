@@ -34,6 +34,7 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
   },
 
   login: async (username: string, password: string) => {
+    console.log(username, password);
     const resp = await authLogin(username, password);
 
     return get().changeStatus(resp?.token, resp?.user);
