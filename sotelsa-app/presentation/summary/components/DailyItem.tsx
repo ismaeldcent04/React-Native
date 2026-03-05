@@ -1,8 +1,14 @@
 import { View, Text, Pressable } from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
+import { Summary } from "@/core/summary/interfaces/summary.interface";
+import { Formatter } from "@/helpers/formatters/formatter";
 
-const DailyItem = ({ date, total, details }: any) => {
+interface Props {
+  summary: Summary;
+}
+
+const DailyItem = ({ summary }: Props) => {
   return (
     <Pressable className="bg-white p-4 rounded-xl border border-gray-100 mb-3 active:scale-95">
       <View className="flex-row items-center gap-3">
@@ -12,13 +18,23 @@ const DailyItem = ({ date, total, details }: any) => {
 
         <View className="flex-1">
           <View className="flex-row justify-between">
-            <Text className="text-sm font-bold">{date}</Text>
-            <Text className="text-sm font-extrabold">{total}</Text>
+            <Text className="text-sm font-bold">
+              {Formatter.formatDate(summary.fechaFactura)}
+            </Text>
+            <Text className="text-sm font-extrabold">
+              {Formatter.formatCurrency(summary.total)}
+            </Text>
           </View>
 
           <View className="flex-row justify-between mt-1">
-            <Text className="text-[11px] text-gray-500">{details}</Text>
-            <Ionicons name="search" size={18} color="#D1D5DB" />
+            <Text className="text-[11px] text-gray-500">
+              {summary.facturas} facturas - Cerrado por {summary.usuario}
+            </Text>
+            <Ionicons
+              name="chevron-forward-outline"
+              size={18}
+              color="#D1D5DB"
+            />
           </View>
         </View>
       </View>

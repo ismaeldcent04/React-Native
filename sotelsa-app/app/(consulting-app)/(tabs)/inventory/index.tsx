@@ -21,6 +21,8 @@ import {
   Wallet,
   ShoppingCart,
 } from "lucide-react-native";
+import { useInventory } from "@/presentation/inventory/hooks/useInventory";
+import InventoryItem from "@/presentation/inventory/components/InventoryItem";
 
 const inventoryData = [
   {
@@ -53,52 +55,7 @@ const inventoryData = [
 ];
 
 export default function InventoryScreen() {
-  const renderItem = ({ item }: any) => {
-    const statusStyles =
-      item.status === "in"
-        ? "bg-green-100 text-green-700"
-        : item.status === "low"
-          ? "bg-orange-100 text-orange-700"
-          : "bg-red-100 text-red-700";
-
-    const dotColor =
-      item.status === "in"
-        ? "bg-green-500"
-        : item.status === "low"
-          ? "bg-orange-500"
-          : "bg-red-500";
-
-    return (
-      <View
-        className={`flex-row gap-4 bg-white dark:bg-gray-900 p-3 rounded-xl border border-gray-100 dark:border-gray-800 items-center ${
-          item.status === "out" ? "opacity-70" : ""
-        }`}
-      >
-        <Image
-          source={{ uri: item.image }}
-          className="w-16 h-16 rounded-lg"
-          resizeMode="cover"
-        />
-
-        <View className="flex-1">
-          <Text className="text-base font-bold text-gray-900 dark:text-white">
-            {item.name}
-          </Text>
-          <Text className="text-xs text-gray-500">SKU: {item.sku}</Text>
-
-          <View className="mt-1">
-            <Text
-              className={`text-xs font-semibold px-2 py-1 rounded-full self-start ${statusStyles}`}
-            >
-              {item.stock > 0 ? `${item.stock} in stock` : "Out of stock"}
-            </Text>
-          </View>
-        </View>
-
-        <View className={`w-2.5 h-2.5 rounded-full ${dotColor}`} />
-      </View>
-    );
-  };
+  const { inventoryQuery, loadNexPage } = useInventory();
 
   return (
     <SafeAreaView className="flex-1 bg-gray-100 dark:bg-[#101922]">
@@ -131,9 +88,9 @@ export default function InventoryScreen() {
 
       {/* List */}
       <FlatList
-        data={inventoryData}
-        keyExtractor={(item) => item.id}
-        renderItem={renderItem}
+        data={inventoryQuery.data?.pages.flatMap((page) => page) ?? []}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => <InventoryItem inventory={item} />}
         contentContainerStyle={{ padding: 16, gap: 8 }}
       />
     </SafeAreaView>

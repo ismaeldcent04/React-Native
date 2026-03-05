@@ -1,13 +1,15 @@
-import { getSummaries } from "@/core/summary/actions/get-summaries.action";
+import { getInventory } from "@/core/inventory/actions/get-inventory.action";
 import { useAuthStore } from "@/presentation/auth/store/useAuthStore";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
-export const useSummaries = (startDate: number, endDate: number) => {
+export const useInventory = () => {
   const { user } = useAuthStore();
-  const summariesQuery = useInfiniteQuery({
-    queryKey: ["summary", "infinite"],
+
+  console.log(user);
+  const inventoryQuery = useInfiniteQuery({
+    queryKey: ["inventory", "infinite"],
     queryFn: ({ pageParam = 1 }) =>
-      getSummaries(20, pageParam, user?.client, startDate, endDate),
+      getInventory(20, pageParam, Number(user?.client)),
     staleTime: 1000 * 60 * 60,
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
@@ -17,8 +19,8 @@ export const useSummaries = (startDate: number, endDate: number) => {
   });
 
   return {
-    summariesQuery,
+    inventoryQuery,
 
-    loadNexPage: summariesQuery.fetchNextPage,
+    loadNexPage: inventoryQuery.fetchNextPage,
   };
 };
