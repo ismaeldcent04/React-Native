@@ -94,16 +94,29 @@ const LoginScreen = () => {
               Username
             </Text>
 
-            <View className="flex-row items-center bg-gray-100 border border-gray-300 dark:bg-white/5  dark:border-white/10 rounded-2xl px-4 h-14">
-              <Ionicons name="person-outline" size={20} color="#6B7280" />
+            {/* <View className="flex justify-center bg-gray-100 border border-gray-300 dark:bg-white/5  dark:border-white/10 rounded-2xl px-4 h-14">
+              <Ionicons
+                className=" left-1 "
+                name="person-outline"
+                size={20}
+                color="#6B7280"
+              />
               <TextInput
                 placeholder="Email or Username"
                 placeholderTextColor="#6B7280"
-                className="flex-1 text-white ml-3"
+                className=" text-white dark:text-white ml-3  lg:w-full h-full"
                 value={form.username}
                 onChangeText={(value) => setForm({ ...form, username: value })}
               />
-            </View>
+            </View> */}
+
+            <TextInput
+              placeholder="Email or Username"
+              placeholderTextColor="#6B7280"
+              className=" bg-gray-100 dark:bg-white/5  dark:border-white/10 rounded-2xl px-4 h-14"
+              value={form.username}
+              onChangeText={(value) => setForm({ ...form, username: value })}
+            />
           </View>
 
           {/* Password */}
@@ -115,7 +128,7 @@ const LoginScreen = () => {
             </View>
 
             <View className="flex-row items-center bg-gray-100 border border-gray-300 dark:bg-white/5  dark:border-white/10 rounded-2xl px-4 h-14">
-              <Ionicons name="lock-closed-outline" size={20} color="#6B7280" />
+              {/* <Ionicons name="lock-closed-outline" size={20} color="#6B7280" /> */}
 
               <TextInput
                 secureTextEntry={!passwordVisible}
