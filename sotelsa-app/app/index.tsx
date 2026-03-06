@@ -11,7 +11,7 @@ const Index = () => {
   }
 
   if (status === "authenticated") {
-    return <Redirect href="/(consulting-app)/(tabs)/summary" />;
+    return <Redirect href="/(consulting-app)/(tabs)/summaries" />;
   }
 
   // En teoría nunca se debería mostrar esto porque RootLayout maneja el checking

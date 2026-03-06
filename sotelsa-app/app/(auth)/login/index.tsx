@@ -13,6 +13,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { TextInput } from "react-native-gesture-handler";
 import { useAuthStore } from "@/presentation/auth/store/useAuthStore";
 import { router } from "expo-router";
+import CustomInput from "@/presentation/auth/components/CustomInput";
 
 const LoginScreen = () => {
   const { login } = useAuthStore();
@@ -33,7 +34,7 @@ const LoginScreen = () => {
     setIsPosting(false);
 
     if (wasSuccessful) {
-      router.replace("/(consulting-app)/(tabs)/summary");
+      router.replace("/(consulting-app)/(tabs)/summaries");
     }
   };
 
@@ -59,7 +60,7 @@ const LoginScreen = () => {
       >
         {/* Glass Card */}
         <View
-          className="  rounded-3xl p-8 border border-gray-300]   dark:border-white/10 dark:bg-white/5 "
+          className=" rounded-3xl p-8 border border-gray-300   dark:border-white/10 dark:bg-white/5 "
           style={{
             shadowColor: "#000",
             shadowOpacity: 0.4,
@@ -90,30 +91,9 @@ const LoginScreen = () => {
 
           {/* Email */}
           <View className="mb-6">
-            <Text className="text-xs font-bold text-gray-400 uppercase mb-2">
-              Username
-            </Text>
-
-            {/* <View className="flex justify-center bg-gray-100 border border-gray-300 dark:bg-white/5  dark:border-white/10 rounded-2xl px-4 h-14">
-              <Ionicons
-                className=" left-1 "
-                name="person-outline"
-                size={20}
-                color="#6B7280"
-              />
-              <TextInput
-                placeholder="Email or Username"
-                placeholderTextColor="#6B7280"
-                className=" text-white dark:text-white ml-3  lg:w-full h-full"
-                value={form.username}
-                onChangeText={(value) => setForm({ ...form, username: value })}
-              />
-            </View> */}
-
-            <TextInput
-              placeholder="Email or Username"
-              placeholderTextColor="#6B7280"
-              className=" bg-gray-100 dark:bg-white/5  dark:border-white/10 rounded-2xl px-4 h-14"
+            <CustomInput
+              label="Username"
+              icon="person-circle-outline"
               value={form.username}
               onChangeText={(value) => setForm({ ...form, username: value })}
             />
@@ -121,32 +101,14 @@ const LoginScreen = () => {
 
           {/* Password */}
           <View className="mb-6">
-            <View className="flex-row justify-between mb-2">
-              <Text className="text-xs font-bold text-gray-400 uppercase">
-                Password
-              </Text>
-            </View>
-
-            <View className="flex-row items-center bg-gray-100 border border-gray-300 dark:bg-white/5  dark:border-white/10 rounded-2xl px-4 h-14">
-              {/* <Ionicons name="lock-closed-outline" size={20} color="#6B7280" /> */}
-
-              <TextInput
-                secureTextEntry={!passwordVisible}
-                placeholder="Password"
-                placeholderTextColor="#6B7280"
-                className="flex-1 text-white ml-3"
-                value={form.password}
-                onChangeText={(value) => setForm({ ...form, password: value })}
-              />
-
-              <Pressable onPress={() => setPasswordVisible(!passwordVisible)}>
-                <Ionicons
-                  name={passwordVisible ? "eye-off-outline" : "eye-outline"}
-                  size={20}
-                  color="#9CA3AF"
-                />
-              </Pressable>
-            </View>
+            <CustomInput
+              label="Password"
+              icon="eye-outline"
+              textContentType="password"
+              isPassword
+              value={form.password}
+              onChangeText={(value) => setForm({ ...form, password: value })}
+            />
           </View>
 
           {/* Button */}

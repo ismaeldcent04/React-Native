@@ -11,7 +11,7 @@ interface Props extends TextInputProps {
 const CustomInput = ({ label, icon, isPassword = false, ...rest }: Props) => {
   const [showPassword, setShowPassword] = useState(false);
   return (
-    <View className="w-[75%]">
+    <View className="w-full">
       <Text className="text-xs font-bold text-gray-400 uppercase mb-2">
         {label}
       </Text>

@@ -2,8 +2,15 @@ import { View, Text } from "react-native";
 import React from "react";
 import StatItem from "./StatItem";
 import { Ionicons } from "@expo/vector-icons";
+import { Inventory } from "@/core/inventory/interfaces/inventory.interface";
+import { Formatter } from "@/helpers/formatters/formatter";
+import { Summary } from "@/core/summary/interfaces/summary.interface";
 
-const SummaryDetail = () => {
+interface Props {
+  summary: Summary;
+}
+
+const SummaryDetail = ({ summary }: Props) => {
   return (
     <View className="p-4">
       <View className="bg-white rounded-2xl p-6 border border-gray-100">
@@ -13,10 +20,10 @@ const SummaryDetail = () => {
               Total Facturado
             </Text>
             <Text className="text-3xl font-extrabold text-[#137fec]">
-              $12,450.00
+              {Formatter.formatCurrency(summary.facturado)}
             </Text>
             <Text className="text-[10px] text-gray-400 mt-1">
-              Period: Oct 01 - Oct 24
+              Period: {Formatter.formatDate(summary.fechaFactura)}
             </Text>
           </View>
 
@@ -24,7 +31,7 @@ const SummaryDetail = () => {
             <Text className="text-[10px] font-bold text-gray-400 uppercase">
               Cant. Facturas
             </Text>
-            <Text className="text-lg font-bold">104</Text>
+            <Text className="text-lg font-bold">{summary.facturas}</Text>
           </View>
         </View>
 
@@ -35,25 +42,25 @@ const SummaryDetail = () => {
             icon="payments"
             color="#078838"
             label="Efectivo"
-            value="$5,250.00"
+            value={Formatter.formatCurrency(summary.efectivo)}
           />
           <StatItem
             icon="credit-card"
             color="#137fec"
             label="Tarjeta"
-            value="$4,380.50"
+            value={Formatter.formatCurrency(summary.tarjeta)}
           />
           <StatItem
             icon="account-balance"
             color="#9333EA"
             label="Transferencia"
-            value="$2,819.50"
+            value={Formatter.formatCurrency(summary.tranferencia)}
           />
           <StatItem
             icon="pending-actions"
             color="#d32f2f"
             label="Pendiente"
-            value="$845.00"
+            value={Formatter.formatCurrency(summary.pendiente)}
           />
         </View>
 
@@ -63,7 +70,9 @@ const SummaryDetail = () => {
             <Text className="text-xs text-gray-500">Descuento Total</Text>
           </View>
 
-          <Text className="text-sm font-bold text-orange-500">-$215.00</Text>
+          <Text className="text-sm font-bold text-orange-500">
+            -{Formatter.formatCurrency(summary.descuento)}
+          </Text>
         </View>
       </View>
     </View>

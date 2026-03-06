@@ -5,29 +5,33 @@ import { Ionicons } from "@expo/vector-icons";
 
 const TabsLayout = () => {
   return (
-    <Tabs screenOptions={{ tabBarActiveTintColor: "#D52041" }}>
+    <Tabs
+      screenOptions={{ tabBarActiveTintColor: "#D52041", headerShown: false }}
+    >
       <Tabs.Screen
-        name="summary/index"
+        name="summaries"
         options={{
           headerShown: false,
           title: "Cuadre",
           tabBarIcon: ({ color }) => (
-            <Ionicons
-              size={28}
-              name="notifications-off-outline"
-              color={color}
-            />
+            <Ionicons size={28} name="calendar-number-outline" color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="inventory/index"
+        name="inventory"
         options={{
           headerShown: false,
           title: "Inventario",
           tabBarIcon: ({ color }) => (
-            <Ionicons size={28} name="alarm-outline" color={color} />
+            <Ionicons size={28} name="bag-outline" color={color} />
           ),
+        }}
+      />
+      <Tabs.Screen
+        name="summaries/[id]"
+        options={{
+          href: null,
         }}
       />
     </Tabs>

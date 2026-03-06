@@ -3,7 +3,7 @@ import { Summary } from "../interfaces/summary.interface";
 
 export const getSummaryById = async (id = 1) => {
   try {
-    const { data } = await consultingApi.get<Summary>(`/Cuadre/ByDate/${id}`);
+    const { data } = await consultingApi.get<Summary>(`/Cuadre/${id}`);
 
     return data;
   } catch (error) {
