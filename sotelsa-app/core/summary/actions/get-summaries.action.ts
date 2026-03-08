@@ -9,7 +9,7 @@ export const getSummaries = async (
   endDate = 20260122,
 ) => {
   try {
-    const { data } = await consultingApi.get<Summary[]>(`/Cuadre/ByDate`, {
+    const { data } = await consultingApi.get<Summary>(`/Cuadre/ByDate`, {
       params: {
         client,
         startDate,

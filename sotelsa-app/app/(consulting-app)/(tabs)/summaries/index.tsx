@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Platform,
+  ScrollView,
 } from "react-native";
 import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
@@ -18,13 +19,12 @@ import { Button } from "@react-navigation/elements";
 import * as DateInputWeb from "@/presentation/summary/components/DateInput.web";
 import * as DateInputMovil from "@/presentation/summary/components/DateInput.native";
 import LogoutIconButton from "@/presentation/auth/components/LogoutIconButton";
+import StatItem from "@/presentation/summary/components/StatItem";
+import SummaryDetail from "@/presentation/summary/components/SummaryDetail";
 
 const SummariesScreen = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const { logout } = useAuthStore();
-  const [showStartDate, setShowStartDate] = useState(false);
-  const [showEndDate, setShowEndDate] = useState(false);
   const [filtered, setFiltered] = useState(false);
 
   const { summariesQuery, loadNexPage } = useSummaries(
@@ -90,6 +90,25 @@ const SummariesScreen = () => {
         </Pressable>
       </View>
 
+      {!summariesQuery.isFetching && (
+        <SummaryDetail
+          summary={
+            summariesQuery.data?.pages[0] ?? {
+              cuadres: [],
+              totalDescuento: 0,
+              totalEfectivo: 0,
+              totalFacturado: 0,
+              totalFacturas: 0,
+              totalPendiente: 0,
+              totalTarjeta: 0,
+              totalTransferencia: 0,
+            }
+          }
+          periodoInicio={Formatter.formatDateToNumber(startDate)}
+          periodoFin={Formatter.formatDateToNumber(endDate)}
+        />
+      )}
+
       {summariesQuery.isFetching ? (
         <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
@@ -97,12 +116,21 @@ const SummariesScreen = () => {
           <ActivityIndicator />
         </View>
       ) : (
-        <View className="px-4 pb-28 mt-6">
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          className="px-4 pb-28 mt-2"
+        >
+          {filtered && (
+            <Text className="text-white mb-1">Cuadres en el periodo</Text>
+          )}
+
           <SummaryList
-            summaries={summariesQuery.data?.pages.flatMap((page) => page) ?? []}
+            summaries={
+              summariesQuery.data?.pages.flatMap((page) => page.cuadres) ?? []
+            }
             loadNextPage={loadNexPage}
           />
-        </View>
+        </ScrollView>
       )}
     </View>
   );

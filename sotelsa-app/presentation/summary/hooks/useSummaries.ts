@@ -11,7 +11,7 @@ export const useSummaries = (startDate: number, endDate: number) => {
     staleTime: 1000 * 60 * 60,
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
-      if (!lastPage || lastPage.length < 10) return undefined;
+      if (!lastPage.cuadres || lastPage.cuadres.length < 10) return undefined;
       return allPages.length + 1;
     },
   });

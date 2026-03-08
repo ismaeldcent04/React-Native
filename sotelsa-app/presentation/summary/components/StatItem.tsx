@@ -9,7 +9,7 @@ const StatItem = ({ icon, color, label, value }: any) => {
         <Ionicons name={icon} size={16} color={color} />
         <Text className="text-xs text-gray-500">{label}</Text>
       </View>
-      <Text className="text-sm font-bold">{value}</Text>
+      <Text className="text-sm font-bold dark:text-white">{value}</Text>
     </View>
   );
 };

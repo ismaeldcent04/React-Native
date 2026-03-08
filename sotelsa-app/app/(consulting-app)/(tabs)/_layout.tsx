@@ -9,7 +9,7 @@ const TabsLayout = () => {
       screenOptions={{ tabBarActiveTintColor: "#D52041", headerShown: false }}
     >
       <Tabs.Screen
-        name="summaries"
+        name="summaries/index"
         options={{
           headerShown: false,
           title: "Cuadre",
@@ -19,19 +19,13 @@ const TabsLayout = () => {
         }}
       />
       <Tabs.Screen
-        name="inventory"
+        name="inventory/index"
         options={{
           headerShown: false,
           title: "Inventario",
           tabBarIcon: ({ color }) => (
             <Ionicons size={28} name="bag-outline" color={color} />
           ),
-        }}
-      />
-      <Tabs.Screen
-        name="summaries/[id]"
-        options={{
-          href: null,
         }}
       />
     </Tabs>

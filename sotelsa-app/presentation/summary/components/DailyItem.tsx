@@ -1,11 +1,11 @@
 import { View, Text, Pressable } from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { Summary } from "@/core/summary/interfaces/summary.interface";
+import { Cuadre, Summary } from "@/core/summary/interfaces/summary.interface";
 import { Formatter } from "@/helpers/formatters/formatter";
 
 interface Props {
-  summary: Summary;
+  summary: Cuadre;
 }
 
 const DailyItem = ({ summary }: Props) => {

@@ -1,11 +1,11 @@
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import React from "react";
-import { Summary } from "@/core/summary/interfaces/summary.interface";
+import { Cuadre, Summary } from "@/core/summary/interfaces/summary.interface";
 import DailyItem from "./DailyItem";
 import { Link, router } from "expo-router";
 
 interface Props {
-  summaries: Summary[];
+  summaries: Cuadre[];
   loadNextPage: () => void;
 }
 
@@ -14,17 +14,7 @@ const SummaryList = ({ summaries, loadNextPage }: Props) => {
     <FlatList
       data={summaries}
       keyExtractor={(item, index) => index.toString()}
-      renderItem={({ item }) => (
-        <Link
-          href={{
-            pathname: "/(consulting-app)/(tabs)/summaries/[id]",
-            params: { id: item.id },
-          }}
-          asChild
-        >
-          <DailyItem summary={item} />
-        </Link>
-      )}
+      renderItem={({ item }) => <DailyItem summary={item} />}
       onEndReached={loadNextPage}
       onEndReachedThreshold={0.8}
       showsVerticalScrollIndicator={false}
