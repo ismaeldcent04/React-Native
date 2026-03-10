@@ -7,7 +7,7 @@ export const useSummaries = (startDate: number, endDate: number) => {
   const summariesQuery = useInfiniteQuery({
     queryKey: ["summaries", "infinite"],
     queryFn: ({ pageParam = 1 }) =>
-      getSummaries(20, pageParam, user?.client, startDate, endDate),
+      getSummaries(10, pageParam, user?.client, startDate, endDate),
     staleTime: 1000 * 60 * 60,
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {

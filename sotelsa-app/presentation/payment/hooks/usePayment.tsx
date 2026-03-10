@@ -1,15 +1,17 @@
-import { getInventory } from "@/core/inventory/actions/get-inventory.action";
+import { View, Text } from "react-native";
+import React from "react";
 import { useAuthStore } from "@/presentation/auth/store/useAuthStore";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { getPayments } from "@/core/payment/actions/get-payments.actions";
 
-export const useInventory = (product: string) => {
+const usePayment = (service: string) => {
   const { user } = useAuthStore();
 
   console.log(user);
-  const inventoryQuery = useInfiniteQuery({
-    queryKey: ["inventory", "infinite", product],
+  const paymentQuery = useInfiniteQuery({
+    queryKey: ["payment", "infinite", service],
     queryFn: ({ pageParam = 1 }) =>
-      getInventory(10, pageParam, Number(user?.client), product),
+      getPayments(10, pageParam, Number(user?.client), service),
     staleTime: 1000 * 60 * 60,
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
@@ -19,6 +21,8 @@ export const useInventory = (product: string) => {
   });
 
   return {
-    inventoryQuery,
+    paymentQuery,
   };
 };
+
+export default usePayment;

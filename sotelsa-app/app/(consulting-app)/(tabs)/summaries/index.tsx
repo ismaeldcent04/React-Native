@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
   Platform,
   ScrollView,
+  useWindowDimensions,
 } from "react-native";
 import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
@@ -32,8 +33,12 @@ const SummariesScreen = () => {
     Formatter.formatDateToNumber(endDate),
   );
 
+  const { width } = useWindowDimensions();
+
+  const isDesktop = width >= 1024;
+
   return (
-    <View className="flex-1  bg-[#f6f7f8] dark:bg-[#0f1115]">
+    <View className="flex-1  bg-[#f6f7f8]  dark:bg-[#0f1115] ">
       {/* HEADER */}
       <View className="pt-16 pb-3 px-4 flex-row items-center justify-between bg-white border-b border-gray-100 dark:bg-[#0f1115] dark:border-gray-800">
         <Text className="text-lg font-bold text-center flex-1 dark:text-white">
@@ -116,21 +121,20 @@ const SummariesScreen = () => {
           <ActivityIndicator />
         </View>
       ) : (
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          className="px-4 pb-28 mt-2"
-        >
-          {filtered && (
-            <Text className="text-white mb-1">Cuadres en el periodo</Text>
-          )}
+        <View className="px-4  my-2">
+          <View>
+            {filtered && (
+              <Text className="text-white mb-1">Cuadres en el periodo</Text>
+            )}
 
-          <SummaryList
-            summaries={
-              summariesQuery.data?.pages.flatMap((page) => page.cuadres) ?? []
-            }
-            loadNextPage={loadNexPage}
-          />
-        </ScrollView>
+            <SummaryList
+              summaries={
+                summariesQuery.data?.pages.flatMap((page) => page.cuadres) ?? []
+              }
+              loadNextPage={loadNexPage}
+            />
+          </View>
+        </View>
       )}
     </View>
   );

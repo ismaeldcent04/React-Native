@@ -28,6 +28,16 @@ const TabsLayout = () => {
           ),
         }}
       />
+      <Tabs.Screen
+        name="payments/index"
+        options={{
+          headerShown: false,
+          title: "Pagos",
+          tabBarIcon: ({ color }) => (
+            <Ionicons size={28} name="pricetag" color={color} />
+          ),
+        }}
+      />
     </Tabs>
   );
 };

@@ -29,4 +29,15 @@ export class Formatter {
       currency: "DOP",
     }).format(value);
   }
+
+  public static formatDateUpper = (date: Date): string => {
+    return date
+      .toLocaleDateString("es-DO", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      })
+      .replace(",", "")
+      .toUpperCase();
+  };
 }
