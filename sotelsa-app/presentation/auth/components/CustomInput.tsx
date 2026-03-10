@@ -12,11 +12,11 @@ const CustomInput = ({ label, icon, isPassword = false, ...rest }: Props) => {
   const [showPassword, setShowPassword] = useState(false);
   return (
     <View className="w-full">
-      <Text className="text-xs font-bold text-gray-400 uppercase mb-2">
+      <Text className="text-xs font-bold text-gray-400 uppercase mb-2 lg:text-base">
         {label}
       </Text>
       <TextInput
-        className="border-b-2 border-[#A2A2A2] py-4 text-sm text-[#A2A2A2] lg:px-2 lg:mt-2"
+        className="border-b-2 border-[#A2A2A2] py-4 text-sm text-[#A2A2A2] lg:px-2 lg:mt-2 lg:text-base"
         placeholder={label}
         secureTextEntry={isPassword && !showPassword}
         {...rest}

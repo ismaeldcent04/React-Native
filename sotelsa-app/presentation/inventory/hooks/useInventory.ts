@@ -7,7 +7,7 @@ export const useInventory = (product: string) => {
 
   console.log(user);
   const inventoryQuery = useInfiniteQuery({
-    queryKey: ["inventory", "infinite", product],
+    queryKey: ["inventory", "infinite", user?.client, product],
     queryFn: ({ pageParam = 1 }) =>
       getInventory(10, pageParam, Number(user?.client), product),
     staleTime: 1000 * 60 * 60,

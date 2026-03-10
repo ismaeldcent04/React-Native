@@ -40,7 +40,7 @@ const SummariesScreen = () => {
   return (
     <View className="flex-1  bg-[#f6f7f8]  dark:bg-[#0f1115] ">
       {/* HEADER */}
-      <View className="pt-16 pb-3 px-4 flex-row items-center justify-between bg-white border-b border-gray-100 dark:bg-[#0f1115] dark:border-gray-800">
+      <View className="pt-16 pb-3 px-4 flex-row items-center justify-between bg-white border-b border-gray-100 dark:bg-[#0f1115] dark:border-gray-800 lg:pt-4">
         <Text className="text-lg font-bold text-center flex-1 dark:text-white">
           Cuadre
         </Text>

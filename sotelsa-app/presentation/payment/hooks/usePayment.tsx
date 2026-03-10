@@ -9,7 +9,7 @@ const usePayment = (service: string) => {
 
   console.log(user);
   const paymentQuery = useInfiniteQuery({
-    queryKey: ["payment", "infinite", service],
+    queryKey: ["payment", "infinite", user?.client, service],
     queryFn: ({ pageParam = 1 }) =>
       getPayments(10, pageParam, Number(user?.client), service),
     staleTime: 1000 * 60 * 60,

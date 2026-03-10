@@ -21,7 +21,7 @@ const CheckAuthenticationLayout = () => {
           marginBottom: 5,
         }}
       >
-        <ActivityIndicator />
+        <ActivityIndicator color={"#137fec"} />
       </View>
     );
   }

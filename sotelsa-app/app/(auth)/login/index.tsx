@@ -10,14 +10,12 @@ import React, { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 
 import { Ionicons } from "@expo/vector-icons";
-import { TextInput } from "react-native-gesture-handler";
 import { useAuthStore } from "@/presentation/auth/store/useAuthStore";
 import { router } from "expo-router";
 import CustomInput from "@/presentation/auth/components/CustomInput";
 
 const LoginScreen = () => {
   const { login } = useAuthStore();
-  const [passwordVisible, setPasswordVisible] = useState(false);
   const [isPosting, setIsPosting] = useState(false);
   const [form, setForm] = useState({
     username: "",
@@ -84,8 +82,8 @@ const LoginScreen = () => {
             <Text className="text-4xl font-extrabold dark:text-white mb-2">
               Bienvenido
             </Text>
-            <Text className="text-gray-400 text-sm">
-              Elevate your business management
+            <Text className="text-gray-400 text-sm lg:text-base">
+              Consulta tus ventas en un solo lugar
             </Text>
           </View>
 

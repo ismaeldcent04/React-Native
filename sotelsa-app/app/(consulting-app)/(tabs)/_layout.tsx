@@ -6,7 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 const TabsLayout = () => {
   return (
     <Tabs
-      screenOptions={{ tabBarActiveTintColor: "#D52041", headerShown: false }}
+      screenOptions={{ tabBarActiveTintColor: "#137fec", headerShown: false }}
     >
       <Tabs.Screen
         name="summaries/index"

@@ -44,7 +44,7 @@ export default function RootLayout() {
         <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
         >
-          <ActivityIndicator size="large" color="#D52041" />
+          <ActivityIndicator size="large" color="#137fec" />
         </View>
       </QueryClientProvider>
     );

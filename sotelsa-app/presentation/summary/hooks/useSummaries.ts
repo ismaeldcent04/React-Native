@@ -5,7 +5,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 export const useSummaries = (startDate: number, endDate: number) => {
   const { user } = useAuthStore();
   const summariesQuery = useInfiniteQuery({
-    queryKey: ["summaries", "infinite"],
+    queryKey: ["summaries", "infinite", user?.client],
     queryFn: ({ pageParam = 1 }) =>
       getSummaries(10, pageParam, user?.client, startDate, endDate),
     staleTime: 1000 * 60 * 60,
