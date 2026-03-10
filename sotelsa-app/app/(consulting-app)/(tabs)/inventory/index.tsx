@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TextInput } from "react-native";
+import { View, Text, TextInput, ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import { Search } from "lucide-react-native";
@@ -28,11 +28,11 @@ export default function InventoryScreen() {
       {/* Search */}
       <View className="p-6 bg-white dark:bg-[#1c2128] dark:border-[#1c2128] space-y-3 ">
         <View className="flex-row gap-2">
-          <View className="flex-1 h-12  flex-row items-center bg-gray-100 dark:bg-gray-800 rounded-xl px-3 ">
+          <View className="flex-1 h-12 px-3  flex-row items-center bg-gray-100 dark:bg-gray-800 rounded-xl ">
             <Search size={18} color="gray" />
             <TextInput
-              placeholder="Search by name or SKU..."
-              className="flex-1 ml-2 text-base text-black dark:text-white"
+              placeholder="Buscar por nombre o cat..."
+              className="flex-1 p-2 ml-2 text-base text-black dark:text-white"
               placeholderTextColor="gray"
               value={productSearch}
               onChangeText={(value) => setProductSearch(value)}
@@ -43,10 +43,18 @@ export default function InventoryScreen() {
 
       {/* List */}
 
-      <InventoryList
-        inventories={inventoryQuery.data?.pages.flatMap((page) => page) ?? []}
-        loadNextPage={inventoryQuery.fetchNextPage}
-      />
+      {inventoryQuery.isLoading ? (
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <ActivityIndicator />
+        </View>
+      ) : (
+        <InventoryList
+          inventories={inventoryQuery.data?.pages.flatMap((page) => page) ?? []}
+          loadNextPage={inventoryQuery.fetchNextPage}
+        />
+      )}
     </SafeAreaView>
   );
 }

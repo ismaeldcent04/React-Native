@@ -22,6 +22,7 @@ import * as DateInputMovil from "@/presentation/summary/components/DateInput.nat
 import LogoutIconButton from "@/presentation/auth/components/LogoutIconButton";
 import StatItem from "@/presentation/summary/components/StatItem";
 import SummaryDetail from "@/presentation/summary/components/SummaryDetail";
+import Animated, { FadeInDown } from "react-native-reanimated";
 
 const SummariesScreen = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -96,22 +97,24 @@ const SummariesScreen = () => {
       </View>
 
       {!summariesQuery.isFetching && (
-        <SummaryDetail
-          summary={
-            summariesQuery.data?.pages[0] ?? {
-              cuadres: [],
-              totalDescuento: 0,
-              totalEfectivo: 0,
-              totalFacturado: 0,
-              totalFacturas: 0,
-              totalPendiente: 0,
-              totalTarjeta: 0,
-              totalTransferencia: 0,
+        <Animated.View entering={FadeInDown.duration(400)}>
+          <SummaryDetail
+            summary={
+              summariesQuery.data?.pages[0] ?? {
+                cuadres: [],
+                totalDescuento: 0,
+                totalEfectivo: 0,
+                totalFacturado: 0,
+                totalFacturas: 0,
+                totalPendiente: 0,
+                totalTarjeta: 0,
+                totalTransferencia: 0,
+              }
             }
-          }
-          periodoInicio={Formatter.formatDateToNumber(startDate)}
-          periodoFin={Formatter.formatDateToNumber(endDate)}
-        />
+            periodoInicio={Formatter.formatDateToNumber(startDate)}
+            periodoFin={Formatter.formatDateToNumber(endDate)}
+          />
+        </Animated.View>
       )}
 
       {summariesQuery.isFetching ? (
@@ -124,7 +127,9 @@ const SummariesScreen = () => {
         <View className="px-4  my-2">
           <View>
             {filtered && (
-              <Text className="text-white mb-1">Cuadres en el periodo</Text>
+              <Text className="text-base mb-1 font-bold dark:text-white ">
+                Cuadres en el periodo
+              </Text>
             )}
 
             <SummaryList

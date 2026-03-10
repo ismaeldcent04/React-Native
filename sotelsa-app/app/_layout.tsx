@@ -42,6 +42,7 @@ export default function RootLayout() {
     return (
       <QueryClientProvider client={queryClient}>
         <View
+          className="flex-1  justify-center items-center bg-white dark:bg-[#0A0C10]"
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
         >
           <ActivityIndicator size="large" color="#137fec" />

@@ -1,4 +1,4 @@
-import { View, Text, TextInput } from "react-native";
+import { View, Text, TextInput, ActivityIndicator } from "react-native";
 import LogoutIconButton from "@/presentation/auth/components/LogoutIconButton";
 import { Search } from "lucide-react-native";
 import { useState } from "react";
@@ -34,13 +34,22 @@ export default function PaymentsScreen() {
         </View>
       </View>
 
+      {paymentQuery.isLoading ? (
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <ActivityIndicator />
+        </View>
+      ) : (
+        <View className="px-4 pt-3">
+          <PaymentList
+            payments={paymentQuery.data?.pages.flatMap((pages) => pages) ?? []}
+            loadNextPage={paymentQuery.fetchNextPage}
+          />
+        </View>
+      )}
+
       {/* LIST */}
-      <View className="px-4 pt-3">
-        <PaymentList
-          payments={paymentQuery.data?.pages.flatMap((pages) => pages) ?? []}
-          loadNextPage={paymentQuery.fetchNextPage}
-        />
-      </View>
     </SafeAreaView>
   );
 }

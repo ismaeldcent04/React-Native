@@ -23,7 +23,7 @@ const InventoryItem = ({ inventory }: Props) => {
 
   return (
     <View
-      className={`flex-row gap-4 mt-1 bg-white  p-3 rounded-xl border border-gray-100 dark:bg-[#1c2128] dark:border-gray-500 items-center lg:mb-2 ${
+      className={`flex-row gap-4 mt-3 bg-white  p-3 rounded-xl border border-gray-100 dark:bg-[#1c2128] dark:border-gray-500 items-center lg:mb-2 ${
         inventory.cantidad <= 0 ? "opacity-70" : ""
       }`}
     >
