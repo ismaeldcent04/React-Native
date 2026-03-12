@@ -23,6 +23,7 @@ import LogoutIconButton from "@/presentation/auth/components/LogoutIconButton";
 import StatItem from "@/presentation/summary/components/StatItem";
 import SummaryDetail from "@/presentation/summary/components/SummaryDetail";
 import Animated, { FadeInDown } from "react-native-reanimated";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const SummariesScreen = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -96,50 +97,30 @@ const SummariesScreen = () => {
         </Pressable>
       </View>
 
-      {!summariesQuery.isFetching && (
-        <Animated.View entering={FadeInDown.duration(400)}>
-          <SummaryDetail
-            summary={
-              summariesQuery.data?.pages[0] ?? {
-                cuadres: [],
-                totalDescuento: 0,
-                totalEfectivo: 0,
-                totalFacturado: 0,
-                totalFacturas: 0,
-                totalPendiente: 0,
-                totalTarjeta: 0,
-                totalTransferencia: 0,
-              }
-            }
-            periodoInicio={Formatter.formatDateToNumber(startDate)}
-            periodoFin={Formatter.formatDateToNumber(endDate)}
-          />
-        </Animated.View>
-      )}
-
       {summariesQuery.isFetching ? (
-        <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        >
-          <ActivityIndicator />
-        </View>
+        <ActivityIndicator />
       ) : (
-        <View className="px-2  flex-1 lg:my-2">
-          <View className="flex-1">
-            {filtered && (
-              <Text className="text-base mb-1 font-bold dark:text-white ">
-                Cuadres en el periodo
-              </Text>
-            )}
-
-            <SummaryList
-              summaries={
-                summariesQuery.data?.pages.flatMap((page) => page.cuadres) ?? []
-              }
-              loadNextPage={loadNexPage}
-            />
-          </View>
-        </View>
+        <SummaryList
+          summaries={
+            summariesQuery.data?.pages.flatMap((page) => page.cuadres) ?? []
+          }
+          loadNextPage={loadNexPage}
+          filtered={filtered}
+          summaryStats={
+            summariesQuery.data?.pages[0] ?? {
+              cuadres: [],
+              totalDescuento: 0,
+              totalEfectivo: 0,
+              totalFacturado: 0,
+              totalFacturas: 0,
+              totalPendiente: 0,
+              totalTarjeta: 0,
+              totalTransferencia: 0,
+            }
+          }
+          periodoInicio={Formatter.formatDateToNumber(startDate)}
+          periodoFin={Formatter.formatDateToNumber(endDate)}
+        />
       )}
     </View>
   );
