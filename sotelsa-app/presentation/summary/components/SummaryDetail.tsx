@@ -15,7 +15,7 @@ interface Props {
 const SummaryDetail = ({ summary, periodoInicio, periodoFin }: Props) => {
   const { width } = useWindowDimensions();
   return (
-    <View className="p-4">
+    <View className="p-2">
       <View className="bg-white rounded-2xl p-6 border border-gray-100 dark:bg-[#1c2128] dark:border-gray-500">
         <View className="flex-row justify-between">
           <View>

@@ -15,10 +15,6 @@ import { ActivityIndicator, View } from "react-native";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-export const unstable_settings = {
-  anchor: "(tabs)",
-};
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {

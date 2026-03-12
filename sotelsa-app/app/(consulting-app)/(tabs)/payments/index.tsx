@@ -24,7 +24,7 @@ export default function PaymentsScreen() {
           <View className="flex-1 h-12  flex-row items-center bg-gray-100 dark:bg-gray-800 rounded-xl px-3 ">
             <Search size={18} color="gray" />
             <TextInput
-              placeholder="Search by name or SKU..."
+              placeholder="Buscar por servicio o nota"
               className="flex-1 ml-2 text-base text-black dark:text-white"
               placeholderTextColor="gray"
               value={productSearch}

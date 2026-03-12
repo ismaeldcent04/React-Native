@@ -1,6 +1,7 @@
 import { View, Text, Image } from "react-native";
 import React from "react";
 import { Inventory } from "@/core/inventory/interfaces/inventory.interface";
+import { Formatter } from "@/helpers/formatters/formatter";
 
 interface Props {
   inventory: Inventory;
@@ -41,11 +42,16 @@ const InventoryItem = ({ inventory }: Props) => {
         <Text className="text-base font-bold text-gray-900 dark:text-white lg:flex-1">
           {inventory.articulo}
         </Text>
-        <Text className="text-xs text-gray-500 lg:flex-1">
+        <Text className="text-xs inline  text-gray-500 lg:flex-1">
           CATEGORIA: {inventory.referencia}
         </Text>
 
-        <View className="mt-1">
+        <Text className="text-white font-bold py-1 inline lg:flex-1">
+          C/P: {Formatter.formatCurrency(inventory.costo)} /{" "}
+          {Formatter.formatCurrency(inventory.precio)}
+        </Text>
+
+        <View className="mt-1 flex-row items-center gap-2">
           <Text
             className={`text-xs font-semibold px-2 py-1 rounded-full self-start ${statusStyles} lg:flex-1`}
           >
